@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="dwiyanhartono.com.ksp3">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/logokspkecil"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logokspkecil"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.KSP3">
+        <activity
+            android:name=".MainActivityCekRoot"
+            android:label="@string/title_activity_main_cek_root"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman8"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman6"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman7"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman5"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman4"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHal2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubHalaman1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="Tes"
+            android:label="@string/title_activity_tes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityPTP"
+            android:label="Settlement"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChangePassword"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TesImageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TesImageActivityList"
+            android:windowSoftInputMode="stateHidden" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".ActivityMapsTracking"
+            android:label="@string/title_activity_maps_tracking" />
+        <activity
+            android:name=".ActivityDetailHistorycal"
+            android:label="@string/title_activity_detail_historycal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityHistorycal"
+            android:label="@string/title_activity_historycal"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityDetailInventory"
+            android:label="@string/title_activity_detail_inventory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityInputKunjungan"
+            android:label="@string/title_activity_input_kunjungan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivityPhoto"
+            android:label="@string/title_activity_input_kunjungan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityPhotoInputKunjungan"
+            android:label="ActivityPhotoInputKunjungan"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ActivityDailyPlanVisit"
+            android:label="@string/title_activity_daily_plan_visit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityAssignment"
+            android:label="@string/title_activity_assignment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityMain"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Print.DeviceListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityLogin"
+            android:label="Activity Login"
+            android:theme="@style/NoActionBarlogin" />
+
+        <service android:name="GPSTracker" />
+        <service android:name="LocationService" />
+
+        <activity android:name=".MainActivity" />
+
+
+        <receiver android:name="SaveLocation" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="dwiyanhartono.com.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>
