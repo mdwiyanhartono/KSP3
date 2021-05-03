@@ -59,7 +59,7 @@ public class SubHalaman6 extends BaseActivity {
         if (a.moveToFirst()) {
 //            Toast.makeText(this, "masuk 1", Toast.LENGTH_SHORT).show();
             do {
-                String namanasabah = a.getString( 2);
+                String namaanggota = a.getString( 2);
                 String cif = a.getString( 1 );
                 String loanid = a.getString( 0 );
                 String hasilkunjungan = a.getString( 4 );
@@ -69,7 +69,7 @@ public class SubHalaman6 extends BaseActivity {
                 String tanggalactionplan = a.getString( 10 );
                 String nominal = a.getString( 7 );
                 String dateprocess = a.getString( 8 );
-                Datakp_1 data = new Datakp_1(namanasabah,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan,tanggalactionplan,nominal,dateprocess);
+                Datakp_1 data = new Datakp_1(namaanggota,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan,tanggalactionplan,nominal,dateprocess);
                 databp.add(data);
 //                Toast.makeText(this, nama1+"/" + cif + "/" + datetime, Toast.LENGTH_SHORT).show();
             } while (a.moveToNext());

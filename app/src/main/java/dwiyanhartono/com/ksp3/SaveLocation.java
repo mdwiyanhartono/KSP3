@@ -70,7 +70,7 @@ private void saveToLocalStorage(Context context) {
 //                Toast.makeText(context, "lat : "+lat +"lng : "+lng, Toast.LENGTH_SHORT).show();
             DBAdapter2 dbAdapter = new DBAdapter2(context);
             dbAdapter.openDB();
-            dbAdapter.addloc(lat, lng, "BELUM TERKIRIM", datetime, id_user);
+            dbAdapter.addloc(lat, lng, "BELUM terkirim", datetime, id_user);
             dbAdapter.close();
             Log.d("e", String.valueOf(mapLocation.isIsNetworkEnabled()));
             if (mapLocation.isIsNetworkEnabled()) {

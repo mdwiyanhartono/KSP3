@@ -3,8 +3,9 @@ package dwiyanhartono.com.ksp3;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import dwiyanhartono.com.ksp3.base.BaseActivity;
 
-public class PendingApproval extends AppCompatActivity {
+public class PendingApproval extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

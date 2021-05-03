@@ -298,7 +298,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/karakter_nasabah"
+                        android:text="@string/karakter_anggota"
                         android:textColor="@color/Black"
                         android:textSize="12sp" />
 
@@ -437,7 +437,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/resume_nasabah"
+                        android:text="@string/resume_anggota"
                         android:textColor="@color/Black"
                         android:textSize="12sp" />
 
@@ -622,7 +622,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/foto_nasabah"
+                        android:text="@string/foto_anggota"
                         android:textSize="12sp"
                         android:textColor="@color/Black" />
 

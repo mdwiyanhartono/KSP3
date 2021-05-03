@@ -1,5 +1,6 @@
 package dwiyanhartono.com.ksp3;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -53,7 +55,7 @@ public class ActivityDailyPlanVisit extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_plan_visit);
-        ceklog();
+        cekAdapterDetailPlanvisit();
         if (statususer == null) {
             Intent i = new Intent(ActivityDailyPlanVisit.this, ActivityLogin.class);
             startActivity(i);
@@ -91,7 +93,7 @@ public class ActivityDailyPlanVisit extends BaseActivity
         }
     }
 
-    private void ceklog() {
+    private void cekAdapterDetailPlanvisit() {
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
         Cursor c = db.getUser();
@@ -109,65 +111,6 @@ public class ActivityDailyPlanVisit extends BaseActivity
         mItems.clear();
         dataplanvisit.clear();
         getdblocal();
-
-//        conn = new Conectiondetector(ActivityDailyPlanVisit.this);
-//        if (conn.isConected()) {
-//            ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-//            Call<ResponsModelPlan> getdata = api.sendPlanvisit(new ReqBodyPlanVisit(id_user));
-//            getdata.enqueue(new Callback<ResponsModelPlan>() {
-//                @Override
-//                public void onResponse(Call<ResponsModelPlan> call, Response<ResponsModelPlan> response) {
-//                    String kode = response.body().getKode();
-//
-//                    if (kode.equals("1")) {
-//                        mItems = response.body().getResult();
-//
-//                        for (int i = 0; i < mItems.size(); i++) {
-//                            String acctno = mItems.get(i).getAcctno();
-//                            String cif = mItems.get(i).getCif();
-//                            String nama = mItems.get(i).getNama();
-//                            String alamat = mItems.get(i).getAlamat();
-//                            String alamatusaha = mItems.get(i).getAlamatusaha();
-//                            String notlp = mItems.get(i).getNotlp();
-//                            String email = mItems.get(i).getEmail();
-//
-//                            String agentid = mItems.get(i).getAgentid();
-//                            String bucket = mItems.get(i).getBucket();
-//                            String bucketeom = mItems.get(i).getBucketeom();
-//                            String os = mItems.get(i).getOs();
-//                            String totaltunggakan = mItems.get(i).getTotaltunggakan();
-//                            String approved = mItems.get(i).getApproved();
-//                            String dpd = mItems.get(i).getDpd();
-//                            String loanid = mItems.get(i).getLoanid();
-//                            String angsuran = mItems.get(i).getAngsuran();
-//
-//                            Dataplanvisit data = new Dataplanvisit(acctno, agentid, nama, bucket,
-//                                    bucketeom, cif, os, totaltunggakan, alamat, approved, dpd, alamatusaha, email, loanid,angsuran,notlp);
-//
-//                            dataplanvisit.add(data);
-//                        }
-//
-//                        adapter.setData(dataplanvisit);
-//                    } else {
-//                        getdblocal();
-//                        Toast.makeText(ActivityDailyPlanVisit.this, "Data Tidak Ada", Toast.LENGTH_SHORT).show();
-//                    }
-//                    swip.setRefreshing(false);
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponsModelPlan> call, Throwable t) {
-//                    t.printStackTrace();
-//                    Toast.makeText(ActivityDailyPlanVisit.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                    getdblocal();
-//                    swip.setRefreshing(false);
-//                }
-//            });
-//        } else {
-//            getdblocal();
-//            swip.setRefreshing(false);
-//        }
-
     }
 
     public void getdblocal() {
@@ -194,16 +137,9 @@ public class ActivityDailyPlanVisit extends BaseActivity
                 String angsuran = q.getString(14);
                 String notlp = q.getString(15);
 
-//                Toast.makeText(ActivityDailyPlanVisit.this, acctno1, Toast.LENGTH_SHORT).show();
-
                 Dataplanvisit data = new Dataplanvisit(acctno1, agentid1, nama1, bucket1,
-                        bucketeom1, cif1, os1, totaltunggakan1, alamat1, approved1, dpd1, alamatusaha1, email1, loanid1,angsuran,notlp);
-
+                        bucketeom1, cif1, os1, totaltunggakan1, alamat1, approved1, dpd1, alamatusaha1, email1, loanid1, angsuran, notlp);
                 dataplanvisit.add(data);
-
-               /* Constants.norek,Constants.AGENTID,  Constants.nama, Constants.bucket, Constants.bucketeom, Constants.cif,
-               Constants.Os, Constants.totaltunggakan,
-                        Constants.almtrm, Constants.DPD, Constants.almtush,Constants.LOAN, Constants.email*/
             }
             while (q.moveToNext());
             adapter.setData(dataplanvisit);
@@ -239,22 +175,9 @@ public class ActivityDailyPlanVisit extends BaseActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            DBAdapter db = new DBAdapter(this);
-//            db.openDB();
-//            db.Deleteuser();
-//            db.close();
-//            Intent inten = new Intent(ActivityDailyPlanVisit.this, SplashScreen.class);
-//            startActivity(inten);
-//            finish();
-//            return true;
-//        }
         if (id == R.id.action_change) {
             Intent inten = new Intent(ActivityDailyPlanVisit.this, ChangePassword.class);
             startActivity(inten);
-//            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -283,63 +206,9 @@ public class ActivityDailyPlanVisit extends BaseActivity
         } else if (id == R.id.nav_manage) {
             conn = new Conectiondetector(ActivityDailyPlanVisit.this);
             if (conn.isConected()) {
-                ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-                getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                    @Override
-                    public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                        String kode = response.body() != null ? response.body().getKode() : "9";
-                        if (kode.equals("1")) {
-                            DBAdapter2 db = new DBAdapter2(ActivityDailyPlanVisit.this);
-                            db.openDB();
-                            db.Deleteuser();
-                            db.deleteparameter();
-//                            db.deleteaccount();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                            db.close();
-                            Intent inten = new Intent(ActivityDailyPlanVisit.this, SplashScreen.class);
-                            startActivity(inten);
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                        DBAdapter2 db = new DBAdapter2(ActivityDailyPlanVisit.this);
-                        db.openDB();
-                        String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                        long result = db.addlogout(id_user, date, "1");
-                        if (result > 0) {
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                        }
-                        db.close();
-                        Intent inten = new Intent(ActivityDailyPlanVisit.this, SplashScreen.class);
-                        startActivity(inten);
-                        finish();
-                    }
-                });
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityDailyPlanVisit.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                }
-                db.close();
-                Intent inten = new Intent(ActivityDailyPlanVisit.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
         }
 
@@ -361,8 +230,9 @@ public class ActivityDailyPlanVisit extends BaseActivity
     }
 
     @Override
-    public void onButonVisitClick(String cif, String nama, String alamat, String alamatusaha, String email, String bucketeom, String dpd, String loanid, String totaldue,String angsuran,String notlp) {
-        Intent inten = new Intent(this, ActivityInputKunjungan.class);
+    public void onButonVisitClick(String norek, String cif, String nama, String alamat, String alamatusaha, String email, String bucketeom, String dpd, String loanid, String totaldue, String angsuran, String notlp) {
+        Intent inten = new Intent(this, ActivityDetailPlanVisit.class);
+        inten.putExtra("norek", norek);
         inten.putExtra("cif", cif);
         inten.putExtra("nama", nama);
         inten.putExtra("alamat", alamat);

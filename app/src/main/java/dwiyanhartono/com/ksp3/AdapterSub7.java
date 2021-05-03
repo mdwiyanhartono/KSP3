@@ -33,7 +33,7 @@ public class AdapterSub7 extends RecyclerView.Adapter<HolderPTP> {
     @Override
     public void onBindViewHolder(final HolderPTP holder, final int position) {
         final Datakp_1 dm = assignment.get(position);
-        holder.namanasabah.setText(dm.getNamanasabah());
+        holder.namaanggota.setText(dm.getNamaanggota());
         holder.cif.setText(dm.getCif());
 //        holder.loan.setText(dm.getLoanid());
         holder.bertemu.setText(dm.getBertemu());

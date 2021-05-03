@@ -9,10 +9,19 @@ import java.util.List;
 public class ResponsModel {
 
     String  kode;
+    String  message;
     List<DataModel> result;
 
     public List<DataModel> getResult() {
         return result;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setResult(List<DataModel> result) {

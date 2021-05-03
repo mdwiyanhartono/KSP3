@@ -55,19 +55,19 @@ public class SubHalaman4 extends BaseActivity {
         datanocantact.clear();
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
-        String nocontacted = "No Contacted";
+        String nocontacted = "Not Contacted";
         Cursor a = db.getnocontactedall(nocontacted);
         if (a.moveToFirst()) {
 //            Toast.makeText(this, "masuk 1", Toast.LENGTH_SHORT).show();
             do {
-                String namanasabah = a.getString(6);
+                String namaanggota = a.getString(6);
                 String cif = a.getString(4);
                 String loanid = a.getString(1);
                 String hasilkunjungan = a.getString(9);
                 String bertemu = a.getString(11);
                 String lokasibertemu = a.getString(13);
                 String actionplan = a.getString(18);
-                Datasub4_1 data = new Datasub4_1(namanasabah, cif, loanid, hasilkunjungan, bertemu, lokasibertemu, actionplan);
+                Datasub4_1 data = new Datasub4_1(namaanggota, cif, loanid, hasilkunjungan, bertemu, lokasibertemu, actionplan);
                 datanocantact.add(data);
 
 //                Toast.makeText(this, nama1+"/" + cif + "/" + datetime, Toast.LENGTH_SHORT).show();
@@ -93,7 +93,7 @@ public class SubHalaman4 extends BaseActivity {
 //
 //                        for(int i = 0; i < mItems.size(); i++) {
 //                            String cif = mItems.get(i).getCif();
-//                            String namanasabah = mItems.get(i).getNamanasabah();
+//                            String namaanggota = mItems.get(i).getNamaanggota();
 //                            String actionplan = mItems.get(i).getActionplan();
 //                            String hasilkunjungan = mItems.get(i).getHasilkunjungan();
 //                            String bertemu = mItems.get(i).getBertemu();
@@ -103,7 +103,7 @@ public class SubHalaman4 extends BaseActivity {
 ////                            String bertemu = mItems.get(i).getBertemu();
 //                            Toast.makeText(SubHalaman4.this, cif, Toast.LENGTH_SHORT).show();
 //
-//                            Datasub4_1 data = new Datasub4_1(namanasabah, cif, loanid, hasilkunjungan, bertemu, lokasibertemu, actionplan);
+//                            Datasub4_1 data = new Datasub4_1(namaanggota, cif, loanid, hasilkunjungan, bertemu, lokasibertemu, actionplan);
 //                            datanocantact.add(data);
 //                        }
 //                        adapter.setData(datanocantact);

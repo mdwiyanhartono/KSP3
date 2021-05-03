@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.renderscript.Sampler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -84,8 +85,8 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
     String deviceUniqueIdentifier = null;
     String imei;
     TextView sc, bp, kp, ptp, nocontacted, pf, contacted, novisit, visit, idagent, namaagent, area, status, textassignmnet;
-    public int num = 600000;
-    public int AL = 7200000;
+    public int num = 900000;
+    public int AL = 900000;
     ImageView imageprofil;
     private List<DataModel> mItems = new ArrayList<>();
 
@@ -98,6 +99,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
     String bulan = new SimpleDateFormat("MMMM", Locale.getDefault()).format(new Date());
 
     ProgressDialog pdLoading;
+    AdapterDetailPlanvisit adapterDetailPlanvisit;
     SwipeRefreshLayout swip;
 
     Conectiondetector conn = new Conectiondetector(this);
@@ -202,7 +204,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
         Cursor c = db.gettimeral("M", "AL", "1");
-        AL = 7200000;
+        AL = 900000;
         if (c.moveToFirst()) {
             AL = c.getInt(0);
 //            Toast.makeText(this, String.valueOf(AL)+"AL" , Toast.LENGTH_SHORT).show();
@@ -229,7 +231,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                     alta.setCancelable(false);
                     alta.setPositiveButton("DOWNLOAD", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(DialogInterface diaAdapterDetailPlanvisit, int which) {
                             pdLoading = new ProgressDialog(ActivityMain.this);
                             pdLoading.setMessage("\tDownloading...");
                             pdLoading.setCancelable(false);
@@ -408,7 +410,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                                 alta = new AlertDialog.Builder(ActivityMain.this);
                                 alta.setTitle("Pesan");
                                 alta.setIcon(R.drawable.warning);
-                                alta.setMessage("Data Image Gagal Terkirim !");
+                                alta.setMessage("Data Image gagal terkirim !");
                                 alta.setCancelable(false);
                                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                     @Override
@@ -430,7 +432,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                                 AlertDialog.Builder alta = new AlertDialog.Builder(ActivityMain.this);
                                 alta.setTitle("Pesan");
                                 alta.setIcon(R.drawable.warning);
-                                alta.setMessage("Data Image Gagal Terkirim ! \r\n Terjadi Masalah : \r\n" + t.getMessage());
+                                alta.setMessage("Data Image gagal terkirim ! \r\n Terjadi Masalah : \r\n" + t.getMessage());
                                 alta.setCancelable(false);
                                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                     @Override
@@ -460,7 +462,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
     }
 
     public void deleteImage(String filename) {
-        File fdelete = new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto" + "/" + filename);
+        File fdelete = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/Colsys").getAbsolutePath(), "AppsPhoto" + "/" + filename);
         if (fdelete.exists()) {
             if (fdelete.delete()) {
                 Log.e("-->", "file Deleted :");
@@ -564,34 +566,70 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                     String lat = x.getString(2);
                     String lng = x.getString(3);
                     final String cifpending = x.getString(4);
-                    final String code_image = x.getString(5);
-                    String namadebitur = x.getString(6);
-                    String statusactionplan = x.getString(7);
-                    String tujuan = x.getString(8);
-                    String hasilkunjungan = x.getString(9);
-                    String kethasilkunjungan = x.getString(10);
-                    String bertemu = x.getString(11);
-                    String ketbertemu = x.getString(12);
-                    String lokasibertemu = x.getString(13);
-                    String ketlokasi = x.getString(14);
-                    String karakter = x.getString(15);
-                    String ketkarakter = x.getString(16);
-                    String negatifissue = x.getString(17);
-                    String actionplan = x.getString(18);
-                    String dateactionplan = x.getString(19);
-                    String resume = x.getString(20);
-                    String totaltunggakan = x.getString(21);
-                    String totalbayar = x.getString(22);
-                    String perkiraan = x.getString(23);
-                    String tgvisit = x.getString(24);
-                    String edit_email = x.getString(25);
-                    String edit_alamat = x.getString(26);
-                    String edit_alamatusaha = x.getString(27);
-                    String pihakbank = x.getString(28);
-                    String notif = x.getString(29);
-                    String status_kirim = x.getString(30);
+                    String loan = x.getString(5);
+                    final String code_image = x.getString(6);
+                    String namadebitur = x.getString(7);
+                    String statusactionplan = x.getString(8);
+                    String tujuan = x.getString(9);
+                    String hasilkunjungan = x.getString(10);
+                    String kethasilkunjungan = x.getString(11);
+                    String bertemu = x.getString(12);
+                    String ketbertemu = x.getString(13);
+                    String lokasibertemu = x.getString(14);
+                    String ketlokasi = x.getString(15);
+                    String karakter = x.getString(16);
+                    String ketkarakter = x.getString(17);
+                    String negatifissue = x.getString(18);
+                    String actionplan = x.getString(19);
+                    String dateactionplan = x.getString(20);
+                    String resume = x.getString(21);
+                    String totaltunggakan = x.getString(22);
+                    String totalbayar = x.getString(23);
+                    String perkiraan = x.getString(24);
+                    String tgvisit = x.getString(25);
+                    String edit_email = x.getString(26);
+                    String edit_alamat = x.getString(27);
+                    String edit_alamatusaha = x.getString(28);
+                    String pihakbank = x.getString(29);
+                    String notif = x.getString(30);
+                    String angsuran = x.getString(31);
+                    String norek = x.getString(32);
+                    String status_kirim = x.getString(33);
                     ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                    Call<ResponsModelChangePswd> getdata1 = api.insertkunjungan2(new RequestKunjungan(code_image, lat, lng, iddata, tujuan, namadebitur, cifpending, "0", hasilkunjungan, kethasilkunjungan, "Hidden", bertemu, ketbertemu, lokasibertemu, ketlokasi, karakter, ketkarakter == null ? "" : ketkarakter, negatifissue, actionplan, "", dateactionplan, resume, totaltunggakan, perkiraan, tgvisit, totalbayar, edit_email, edit_alamatusaha, edit_alamat, pihakbank,notif));
+                    Call<ResponsModelChangePswd> getdata1 = api.insertkunjungan2(new RequestKunjungan(
+                            code_image,
+                            lat,
+                            lng,
+                            id_user,
+                            tujuan,
+                            namadebitur,
+                            cifpending,
+                            loan,
+                            hasilkunjungan,
+                            kethasilkunjungan,
+                            "Hidden",
+                            bertemu,
+                            ketbertemu,
+                            lokasibertemu,
+                            ketlokasi,
+                            karakter,
+                            ketkarakter == null ? "null" : ketkarakter,
+                            negatifissue,
+                            actionplan,
+                            "hidden",
+                            dateactionplan,
+                            resume,
+                            totaltunggakan,
+                            perkiraan,
+                            tgvisit,
+                            totalbayar,
+                            edit_email,
+                            edit_alamatusaha,
+                            edit_alamat,
+                            pihakbank,
+                            notif,
+                            angsuran,
+                            norek));
                     getdata1.enqueue(new Callback<ResponsModelChangePswd>() {
                         @Override
                         public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
@@ -674,7 +712,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                         @Override
                         public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
                             pdLoading.dismiss();
-//                            Toast.makeText(ActivityMain.this, "Response code : am_SDDTAerr_02", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityMain.this, "Response code : am_SDDTAerr_02 "+t.getMessage(), Toast.LENGTH_SHORT).show();
                             Log.i("testresponse2", t.getMessage());
                         }
                     });
@@ -682,14 +720,14 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
             }
         } else {
             pdLoading.dismiss();
-//            Toast.makeText(ActivityMain.this, "Data Null", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityMain.this, "Data Null", Toast.LENGTH_SHORT).show();
         }
         db.close();
     }
 
 
     public File getimage(String filename) {
-        return new File(Environment.getExternalStoragePublicDirectory("iColls").getAbsolutePath(), "AppsPhoto/" + filename);
+        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/Colsys").getAbsolutePath(), "AppsPhoto/" + filename);
     }
 
 
@@ -750,8 +788,6 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                 bp.setText(String.valueOf(bpcount));
             }
         }
-
-
         db.close();
 
     }
@@ -811,12 +847,12 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                         break;
                     case "9":
                         pdLoading.dismiss();
-//                        Toast.makeText(ActivityMain.this, "Response code : am_ACC_01", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMain.this, "Response code : am_ACC_01", Toast.LENGTH_SHORT).show();
 
                         break;
                     default:
                         pdLoading.dismiss();
-//                        Toast.makeText(ActivityMain.this, "Data Null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityMain.this, "Data Null", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -826,7 +862,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
             public void onFailure(Call<ResponsModelDetailAccount> call, Throwable t) {
                 t.printStackTrace();
                 pdLoading.dismiss();
-//                Toast.makeText(ActivityMain.this, "Response code : am_ACCerr_02", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityMain.this, "Response code : am_ACCerr_02" + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -841,10 +877,6 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                 datatunggakan = response.body() != null ? response.body().getResult() : datatunggakan;
                 switch (kode) {
                     case "1":
-//                    DBAdapter2 db = new DBAdapter2(ActivityMain.this);
-//                    db.openDB();
-//                    db.deletetunggakan();
-//                    db.close();
                         int size = datatunggakan.size();
                         int n = 0;
                         for (int i = 0; i < datatunggakan.size(); i++) {
@@ -1048,7 +1080,7 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
         Cursor c = db.gettimer("M", "TMR", "1");
-        num = 600000;
+        num = 900000;
         if (c.moveToFirst()) {
             num = c.getInt(0);
 //            Toast.makeText(this, String.valueOf(num) , Toast.LENGTH_SHORT).show();
@@ -1134,65 +1166,11 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
 //            Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
 //            startActivity(inten);
 //            finish();
-            if (conn.isConected()) {
-                ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-                getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                    @Override
-                    public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                        String kode = response.body().getKode();
-                        if (kode.equals("1")) {
-                            DBAdapter2 db = new DBAdapter2(ActivityMain.this);
-                            db.openDB();
-                            db.deleteparameter();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-//                            db.deleteselfcuredall();
-                            db.Deleteuser();
-                            db.close();
-                            Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
-                            startActivity(inten);
-                            finish();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                        DBAdapter2 db = new DBAdapter2(ActivityMain.this);
-                        db.openDB();
-                        String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                        long result = db.addlogout(id_user, date, "1");
-                        if (result > 0) {
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                            db.Deleteuser();
-                        }
-                        db.close();
-                        Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
-                        startActivity(inten);
-                        finish();
-                    }
-                });
+            if (conn.isConected()) {
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityMain.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                    db.Deleteuser();
-                }
-                db.close();
-                Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
 //            DBAdapter2 db = new DBAdapter2(ActivityMain.this);
 //            db.openDB();
@@ -1296,10 +1274,12 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void onDestroy() {
-        timer = new Timer();
-        Log.d("onDestroyMain", "START TIMER");
-        LogOutTimerTask logoutTimeTask = new LogOutTimerTask();
-        timer.schedule(logoutTimeTask, AL); //auto logout in 5 minutes 600000
+//        timer = new Timer();
+//        Log.d("onDestroyMain", "START TIMER");
+//        Log.d("onDestroyMainAL", String.valueOf(AL));
+//        Toast.makeText(this, "Start Timer", Toast.LENGTH_SHORT).show();
+//        LogOutTimerTask logoutTimeTask = new LogOutTimerTask();
+//        timer.schedule(logoutTimeTask, AL); //auto logout in 5 minutes 600000
         super.onDestroy();
     }
 
@@ -1350,8 +1330,9 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                             db.openDB();
                             db.Deleteuser();
                             db.close();
-                            Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
-                            startActivity(inten);
+                            notifLogout1();
+//                            Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
+//                            startActivity(inten);
                         }
                     }
 
@@ -1362,16 +1343,16 @@ public class ActivityMain extends BaseActivity implements NavigationView.OnNavig
                         db.openDB();
                         db.Deleteuser();
                         db.close();
-                        Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
-                        startActivity(inten);
+                        notifLogout1();
+//                        Intent inten = new Intent(ActivityMain.this, SplashScreen.class);
+//                        startActivity(inten);
                     }
                 });
             }
             //redirect user to login screen
-
-
             if (timer != null) {
                 timer.cancel();
+//                Toast.makeText(ActivityMain.this, "Cancel Timer", Toast.LENGTH_SHORT).show();
                 Log.i("AfterDelete", "cancel timer");
                 timer = null;
             }

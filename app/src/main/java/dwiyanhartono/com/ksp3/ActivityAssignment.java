@@ -65,7 +65,7 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
         if (conn.isConected()) {
             ceklogserver();
         } else {
-            Toast.makeText(ActivityAssignment.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityAssignment.this, "No internet connection", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -282,24 +282,9 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
         } else if (id == R.id.nav_manage) {
             conn = new Conectiondetector(ActivityAssignment.this);
             if (conn.isConected()) {
-                logout();
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityAssignment.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                }
-
-                db.close();
-                Intent inten = new Intent(ActivityAssignment.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
         }
 
@@ -314,11 +299,11 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
 
         if (isChecked) {
             Log.d("Add Data", id);
-            Toast.makeText(ActivityAssignment.this, "Add Data: " + id, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ActivityAssignment.this, "Add Data: " + id, Toast.LENGTH_SHORT).show();
             selectedDebitur.add(id);
         } else {
             Log.d("Remove Data", id);
-            Toast.makeText(ActivityAssignment.this, "Remove Data: " + id, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ActivityAssignment.this, "Remove Data: " + id, Toast.LENGTH_SHORT).show();
             selectedDebitur.remove(id);
         }
         String a = "";
@@ -326,41 +311,11 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
             a += s + "#";
         }
         Log.d("Data Selected", a);
-        Toast.makeText(ActivityAssignment.this, "Data Selected: " + a, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(ActivityAssignment.this, "Data Selected: " + a, Toast.LENGTH_SHORT).show();
 
     }
 
-    private void logout() {
-        ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-        Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-        getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-            @Override
-            public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                String kode = response.body() != null ? response.body().getKode() : "9";
-                if (kode.equals("1")) {
-                    DBAdapter2 db = new DBAdapter2(ActivityAssignment.this);
-                    db.openDB();
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                    db.close();
-                    Intent inten = new Intent(ActivityAssignment.this, SplashScreen.class);
-                    startActivity(inten);
-                    finish();
-                } else if (kode.equals("9")) {
 
-//                    Toast.makeText(ActivityAssignment.this, "Response code : as_LGT_01", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-//                Toast.makeText(ActivityAssignment.this, "Response code : as_LGTerr_01", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     public void apply(View view) {
         final ProgressDialog pdLoading = new ProgressDialog(this);
@@ -373,7 +328,7 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityAssignment.this);
             alta.setTitle("Pesan");
             alta.setIcon(R.drawable.warning);
-            alta.setMessage("Data gagal di kirim silahkan pilih terlebih dahulu data data yang akan di kunjungi");
+            alta.setMessage("Data gagal dikirim silahkan pilih terlebih dahulu data data yang akan dikunjungi");
             alta.setCancelable(false);
             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                 @Override
@@ -389,40 +344,19 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
             //retrivew();
         } else {
             ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-            Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur, id_user));
+            Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur, id_user,""));
             getdata.enqueue(new Callback<ResponsModel>() {
                 @Override
                 public void onResponse(Call<ResponsModel> call, Response<ResponsModel> response) {
                     String kode2 = response.body() != null ? response.body().getKode() : "9";
+                    String message = response.body() != null ? response.body().getMessage() : "Blank Message";
                     switch (kode2) {
                         case "1": {
                             pdLoading.dismiss();
                             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityAssignment.this);
                             alta.setTitle("Pesan");
                             alta.setIcon(R.drawable.checklist);
-                            alta.setMessage("Data Berhasil Di Kirim Ke Server, Silahkan Menunggu Approval !");
-                            alta.setCancelable(false);
-                            alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    selectedDebitur = new ArrayList<>();
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            alta.create();
-                            alta.show();
-                            retrivew();
-//                    Toast.makeText(ActivityAssignment.this, "sucsses", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case "9": {
-                            pdLoading.dismiss();
-
-                            AlertDialog.Builder alta = new AlertDialog.Builder(ActivityAssignment.this);
-                            alta.setTitle("Pesan");
-                            alta.setIcon(R.drawable.warning);
-                            alta.setMessage("Response code : as_APASS_01");
+                            alta.setMessage(message);
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
@@ -435,7 +369,30 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
 
                             alta.create();
                             alta.show();
-                            retrivew();
+
+//                    Toast.makeText(ActivityAssignment.this, "sucsses", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        case "9": {
+                            pdLoading.dismiss();
+
+                            AlertDialog.Builder alta = new AlertDialog.Builder(ActivityAssignment.this);
+                            alta.setTitle("Pesan");
+                            alta.setIcon(R.drawable.warning);
+                            alta.setMessage(message);
+                            alta.setCancelable(false);
+                            alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    selectedDebitur = new ArrayList<>();
+                                    retrivew();
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            alta.create();
+                            alta.show();
+
                             break;
                         }
                         default: {
@@ -444,19 +401,20 @@ public class ActivityAssignment extends BaseActivity implements NavigationView.O
                             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityAssignment.this);
                             alta.setTitle("Pesan");
                             alta.setIcon(R.drawable.warning);
-                            alta.setMessage("Data gagal di kirim silahkan pilih terlebih dahulu data data yang akan di kunjungi !");
+                            alta.setMessage("Data gagal dikirim silahkan pilih terlebih dahulu data data yang akan dikunjungi!");
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
                                     selectedDebitur = new ArrayList<>();
+                                    retrivew();
                                 }
                             });
 
                             alta.create();
                             alta.show();
-                            retrivew();
+
                             break;
                         }
                     }

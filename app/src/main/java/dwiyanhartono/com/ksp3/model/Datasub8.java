@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class Datasub8 {
 
     @SerializedName("NamaDebitur")
-    private String namanasabah;
-    @SerializedName("NomorNasabah")
+    private String namaanggota;
+    @SerializedName("Nomoranggota")
     private String cif;
     @SerializedName("ID")
     private String loanid;
@@ -15,20 +15,20 @@ public class Datasub8 {
     @SerializedName("PROCESSING_DATE")
     private String namaproduk;
 
-    public Datasub8(String namanasabah, String cif, String loanid, String jenisfasilitas, String namaproduk) {
-        this.namanasabah = namanasabah;
+    public Datasub8(String namaanggota, String cif, String loanid, String jenisfasilitas, String namaproduk) {
+        this.namaanggota = namaanggota;
         this.cif = cif;
         this.loanid = loanid;
         this.jenisfasilitas = jenisfasilitas;
         this.namaproduk = namaproduk;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {

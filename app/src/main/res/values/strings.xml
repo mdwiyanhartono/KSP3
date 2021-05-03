@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Colsys</string>
+    <string name="app_name">Collsys</string>
     <string name="title_activity_main">ActivityMain</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,13 +11,14 @@
     <string name="go_to_permissions_settings" />
     <string name="title_activity_assignment">ActivityAssignment</string>
     <string name="title_activity_daily_plan_visit">ActivityDailyPlanVisit</string>
+    <string name="title_activity_detail_plan_visit">ActivityDetailPlanVisit</string>
     <string name="title_activity_input_kunjungan">ActivityInputKunjungan</string>
     <string name="title_activity_detail_inventory">ActivityDetailInventory</string>
     <string name="title_activity_historycal">ActivityHistorycal</string>
     <string name="title_activity_detail_historycal">ActivityDetailHistorycal</string>
     <string name="title_activity_maps_tracking">Map</string>
     <string name="input_diperlukan">Kolom harus diisi</string>
-    <string name="password_salah">Format password salah (Minimal 8 karakter dengan kombinasi huruf besar, kecil dan angka)</string>
+    <string name="password_salah">Format password salah (minimal 8 karakter dengan kombinasi huruf besar, kecil dan angka)</string>
     <string name="title_activity_ptp">ActivityPTP</string>
     <string name="title_activity_tes">Tes</string>
     <string name="title_activity_main_cek_root">MainActivityCekRoot</string>
@@ -56,7 +57,7 @@
     <string name="password_baru">Password Baru</string>
     <string name="ketik_ulang_password_baru">Ketik Ulang Password baru</string>
     <string name="kirim">kirim</string>
-    <string name="bss_collection_system_ver_1_0_1">KSP - Colsys - Ver.0.0.1 </string>
+    <string name="bss_collection_system_ver_1_0_1">KSP - Colsys - Ver.0.0.2 </string>
     <string name="password">Password</string>
     <string name="user_name">User Name</string>
     <string name="sign_in">Sign In</string>
@@ -66,9 +67,9 @@
     <string name="login">Login</string>
     <string name="email_gmail_com">Email@gmail.com</string>
     <string name="user_name_user_id">User Name / User ID</string>
-    <string name="confirmasi_user_id_user_name">Confirmasi User ID / User Name</string>
+    <string name="confirmasi_user_id_user_name">Kondirmasi User ID </string>
     <string name="lupa_password1">Lupa Password</string>
-    <string name="cancel" >cancel</string>
+    <string name="cancel">Batal</string>
     <string name="kirim1">Kirim</string>
     <string name="contact">Contact</string>
     <string name="titik2">:</string>
@@ -102,13 +103,13 @@
     <string name="ptp">PTP</string>
     <string name="collection_officer">Collection Officer</string>
     <string name="view_photo">view photo</string>
-    <string name="foto_nasabah">Foto Nasabah</string>
-    <string name="karakter_nasabah">Karakter Nasabah</string>
+    <string name="foto_anggota">foto anggota</string>
+    <string name="karakter_anggota">Karakter anggota</string>
     <string name="lokasi_bertemu">Lokasi Bertemu</string>
     <string name="nominal_bayar">Nominal Bayar</string>
     <string name="bertemu_dengan">Bertemu Dengan</string>
     <string name="hasil_kunjungan">Hasil Kunjungan</string>
-    <string name="resume_nasabah">Resume Nasabah</string>
+    <string name="resume_anggota">Resume anggota</string>
     <string name="action_plan">Action Plan</string>
     <string name="action_plan_date">Action Plan Date</string>
     <string name="historical_restrukturisasi">Historical Restrukturisasi</string>
@@ -145,10 +146,10 @@
     <string name="flag_probiz">Flag Probiz</string>
     <string name="action_plan_puk">Action Plan PUK</string>
     <string name="tujuan_visit">Tujuan Visit</string>
-    <string name="upload_foto_jaminan">Upload Foto Jaminan</string>
+    <string name="upload_foto_jaminan">Upload foto Jaminan</string>
     <string name="perkiraan_perbaikan_bucket">Perkiraan Perbaikan Bucket</string>
-    <string name="pihak_bank">Pihak Bank</string>
-    <string name="nama_nasabah">Nama Nasabah</string>
+    <string name="pihak_bank">Pihak KSP</string>
+    <string name="nama_anggota">Nama Anggota</string>
     <string name="no_cif2">No.CIF</string>
     <string name="jika_alamat_rumah_tidak_sesuai">Jika Alamat Rumah Tidak Sesuai</string>
     <string name="alamat_usaha_tidak_sesuai">Alamat Usaha Tidak Sesuai</string>
@@ -156,7 +157,7 @@
     <string name="no_telephon">No Telephon</string>
     <string name="email">Email</string>
     <string name="email_tidak_sesuai">Email Tidak Sesuai</string>
-    <string name="foto_document">Foto Document</string>
+    <string name="foto_document">foto Document</string>
     <string name="upload">Upload</string>
     <string name="uppload">uppload</string>
     <string name="keterangan21">Keterangan</string>
@@ -186,7 +187,7 @@
     <string name="tidak">Tidak</string>
     <string name="action_plan21">Action Plan</string>
     <string name="target_date_action_plan">Target Date Action Plan</string>
-    <string name="resume_nasabah21">Resume Nasabah</string>
+    <string name="resume_anggota21">Resume anggota</string>
     <string name="detail_tunggakan">Detail Tunggakan</string>
     <string name="id">ID</string>
     <string name="installment_date">Installment Date</string>
@@ -200,10 +201,18 @@
     <string name="ceklist">ceklist</string>
     <string name="search">Search</string>
     <string name="logout">Logout</string>
-    <string name="daily_activities">Daily Activities</string>
+    <string name="daily_activities">Plan Visit</string>
     <string name="todo">TODO</string>
     <string name="notifikasi">Notifikasi</string>
     <string name="print">Print</string>
     <string name="settlement">Settlement</string>
+    <string name="nomor_rekening">Rekening</string>
+    <string name="saldo">Saldo</string>
+    <string name="detail_fasilitas">Detail Fasilitas</string>
+    <string name="account_number">Account Number</string>
+    <string name="ld">LD</string>
+    <string name="home">Home</string>
+    <string name="confirmasi_email">Konfirmasi Email</string>
+    <string name="no_rekanggota">No Rek</string>
 
 </resources>

@@ -19,7 +19,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by dwiyan on.
+ * Created by dwiyanon.
  */
 
 public class Retroserver {
@@ -27,8 +27,6 @@ public class Retroserver {
     private static OkHttpClient getUnsafeOkHttpClient(int TO) {
 
         try {
-
-
             // Create a trust manager that does not validate certificate chains
             final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 @Override
@@ -81,9 +79,10 @@ public class Retroserver {
 //    private static final String base_url = "https://192.168.43.51/c24api_collection/collection/";
 //    private static final String base_url = "http://10.196.242.20:8787/c24api_collection/collection/";
 //    private static final String base_url = "https://10.199.28.15:8888/c24api_collection/collection/";
-//    private static final String base_url = "http://103.102.1.51/c24api_collection/collection/";
-    private static final String base_url = "https://192.168.31.138/c24api_collectionNew/collection/";
-//    private static final String base_url = "https://192.168.43.136/c24api_collectionNew/collection/";
+//    private static final String base_url = "http://103.102.1.51/c24api_collection/collection/"; // server anagata
+//    private static final String base_url = "https://192.168.31.138/c24api_collectionNew/collection/"; // anagata
+//    private static final String base_url = "https://192.168.43.136/c24api_collectionNew/collection/"; // hotspot mobile
+    private static final String base_url = "http://10.51.238.25:8082/c24api_collectionNew/collection/"; // ksp
 
 
     private static Retrofit retrofit;

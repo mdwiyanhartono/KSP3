@@ -83,8 +83,6 @@ public class DBAdapter2 {
             cv.put(Constant.cabang, cabang);
             cv.put(Constant.aoname, aoname);
             cv.put(Constant.actionplanpuk, actionplanpuk);
-
-
             cv.put(Constant.agentid, agentid);
             cv.put(Constant.bucket, bucket);
             cv.put(Constant.bucketeom, bucketeom);
@@ -160,11 +158,12 @@ public class DBAdapter2 {
     public long addkunjungan(String iddata, String cif, String codeimage, String tujuan, String hasilkunjungan, String kethasilkunjungan,
                              String namadebitur, String statusactionplan, String bertemu, String ketbertemu, String lokasibertemu,
                              String ketlokasi, String karakter, String negatifissue, String actionplan, String dateactionplan,
-                             String resume, String totaltunggakan, String totalbayar, String perkiraan, String tgvisit, String lat, String lng, String sts,String edit_email,String edit_alamat,String edit_alamatusaha,String pihakbank,String ketkarakter,String notif) {
+                             String resume, String totaltunggakan, String totalbayar, String perkiraan, String tgvisit, String lat, String lng, String sts,String edit_email,String edit_alamat,String edit_alamatusaha,String pihakbank,String ketkarakter,String notif,String norek, String angsuran,String ld) {
         try {
             ContentValues cv = new ContentValues();
             cv.put(Constant.iddata, iddata);
             cv.put(Constant.cif, cif);
+            cv.put(Constant.loanid, ld);
             cv.put(Constant.codeimage, codeimage);
             cv.put(Constant.tujuan, tujuan);
             cv.put(Constant.hasilkunjungan, hasilkunjungan);
@@ -193,6 +192,8 @@ public class DBAdapter2 {
             cv.put(Constant.pihakbank, pihakbank);
             cv.put(Constant.notif, notif);
             cv.put(Constant.status_kirim, sts);
+            cv.put(Constant.norekening, norek);
+            cv.put(Constant.angsuran, angsuran);
 //            db.delete(Constant.TB_NAME12, null,null);
 //            return
            return db.insert(Constant.TB_NAME12, null, cv);
@@ -408,7 +409,7 @@ public class DBAdapter2 {
 
     public Cursor getkunjungannocontacted() {
 
-        return db.rawQuery("SELECT COUNT(*) FROM " + Constant.TB_NAME12 + " where " + Constant.hasilkunjungan + " = ? ", new String[]{"No Contacted"});
+        return db.rawQuery("SELECT COUNT(*) FROM " + Constant.TB_NAME12 + " where " + Constant.hasilkunjungan + " = ? ", new String[]{"Not Contacted"});
 
     }
 
@@ -540,68 +541,68 @@ public class DBAdapter2 {
     public Cursor getcountercontact(String cif) {
         return db.rawQuery("SELECT COUNT(*) FROM " + Constant.TB_NAME9 + " where " + Constant.cif + " =?", new String[]{cif});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getcontact(String cif) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME9 + " where " + Constant.cif + " =?", new String[]{cif});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getimage(String cif, String codeimg, String type) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME8 + " where " + Constant.cif + " = ? AND " + Constant.code_image + "=? AND " + Constant.typefile + "=?", new String[]{cif, codeimg, type});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getimage2(String cif, String codeimg, String ststus, String type) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME8 + " where " + Constant.cif + " = ? AND " + Constant.code_image + "=? AND " + Constant.status_kirim + "=? AND " + Constant.typefile + "= ?", new String[]{cif, codeimg, ststus, type});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getimage3(String cif, String codeimg, String ststus, String type) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME8 + " where " + Constant.cif + " = ? AND " + Constant.code_image + "=? AND " + Constant.status_kirim + "=? AND " + Constant.typefile + "= ?", new String[]{cif, codeimg, ststus, type});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getimage4(String cif, String codeimg, String ststus) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME8 + " where " + Constant.cif + " = ? AND " + Constant.code_image + "=? AND " + Constant.status_kirim + "=?", new String[]{cif, codeimg, ststus});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
 
     public Cursor getimageall() {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME8 + " where " + Constant.status_kirim + "=?", new String[]{"0"});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getcontactall(String cif, String status) {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME9 + " where " + Constant.cif + " = ? AND " + Constant.status_kirim + "=? ", new String[]{cif, status});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getcontactallpending() {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME9 + " where " + Constant.status_kirim + "=? ", new String[]{"0"});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getkunjunganpendingall() {
         return db.rawQuery("SELECT * FROM " + Constant.TB_NAME12 + " where " + Constant.status_kirim + "=? ", new String[]{"0"});
 
-        // return db.query(Constant.TB_NAME2,null ,Constant.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constant.TB_NAME2,null ,Constant.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getlocation() {
         //String[] columns = {Constants.ROW_USER, Constants.ROW_LAT, Constants.ROW_LONG, Constants.ROW_DATETIME, Constants.ROW_ID_USER, Constants.ROW_IDLOC};
 
-        return db.rawQuery("SELECT * FROM " + Constant.TB_NAME10 + " where " + Constant.status_kirim + "=?", new String[]{"BELUM TERKIRIM"});
+        return db.rawQuery("SELECT * FROM " + Constant.TB_NAME10 + " where " + Constant.status_kirim + "=?", new String[]{"BELUM terkirim"});
 
     }
 
@@ -623,7 +624,29 @@ public class DBAdapter2 {
                 Constant.angsuran,
                 Constant.notlp};
 
-        return db.query(Constant.TB_NAME3, columns, Constant.agentid + "=?", new String[]{agenntid}, null, null, null);
+        return db.query(Constant.TB_NAME3, columns, Constant.agentid + "=?", new String[]{agenntid}, Constant.cif, null, null);
+
+    }
+
+    public Cursor getdetailplanvisit(String agenntid) {
+        String[] columns = {Constant.norekening,
+                Constant.agentid,
+                Constant.namadebitur,
+                Constant.bucket,
+                Constant.bucketeom,
+                Constant.cif,
+                Constant.os,
+                Constant.totaltunggakan,
+                Constant.alamatrumah,
+                Constant.dpd,
+                Constant.alamatusaha,
+                Constant.loanid,
+                Constant.email,
+                Constant.approved,
+                Constant.angsuran,
+                Constant.notlp};
+
+        return db.query(Constant.TB_NAME3, columns, Constant.cif + "=?", new String[]{agenntid}, null, null, null);
 
     }
 
@@ -963,7 +986,7 @@ public class DBAdapter2 {
 
     public long deleteaccountpercif(String date) {
         try {
-            return db.delete(Constant.TB_NAME3, Constant.cif+" =?", new String[]{date});
+            return db.delete(Constant.TB_NAME3, Constant.loanid+" =?", new String[]{date});
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -973,7 +996,7 @@ public class DBAdapter2 {
     }
     public long deletetunggakan(String date) {
         try {
-            return db.delete(Constant.CREATE_TB4, Constant.cif +" =?", new String[]{date});
+            return db.delete(Constant.CREATE_TB4, Constant.idt +" =?", new String[]{date});
 
         } catch (SQLException e) {
             e.printStackTrace();

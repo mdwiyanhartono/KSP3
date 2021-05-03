@@ -10,17 +10,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white"
         android:orientation="horizontal"
         card_view:cardCornerRadius="10dp"
-        android:layout_marginBottom="10dp"
         card_view:cardElevation="5dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background_cardview"
-            android:orientation="vertical">
+            android:background="@drawable/rounded_background_cardview">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/ck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="center_vertical"
+                    android:theme="@style/Checkbox">
+
+                </androidx.appcompat.widget.AppCompatCheckBox>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,7 +57,7 @@
                     <TextView
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:text="Nama Nasabah"
+                        android:text="Nama anggota"
                         android:textColor="@color/Black"
                         android:textSize="11sp" />
 
@@ -50,7 +69,7 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/namanasabah"
+                        android:id="@+id/namaanggota"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bucket"
@@ -80,34 +99,7 @@
                     <TextView
                         android:id="@+id/cif"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No Cif"
-                        android:textSize="11sp" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:text="No Refrence Payment"
-                        android:textColor="@color/Black"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="3dp"
-                        android:text=":"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:id="@+id/ref"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="No Cif"
                         android:textSize="11sp" />
 
@@ -121,7 +113,7 @@
                     <TextView
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:text="Tunggakan"
+                        android:text="@string/no_rekanggota"
                         android:textColor="@color/Black"
                         android:textSize="11sp" />
 
@@ -133,13 +125,42 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/tunggakan"
+                        android:id="@+id/norekanggota"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No Rek"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ld"
+                        android:textColor="@color/Black"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp"
+                        android:text=":"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/ld"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No Cif"
                         android:textSize="11sp" />
 
                 </LinearLayout>
+
 
 
                 <LinearLayout
@@ -151,7 +172,7 @@
                     <TextView
                         android:layout_width="110dp"
                         android:layout_height="wrap_content"
-                        android:text="Nominal Pembayaran"
+                        android:text="Nominal Bayar"
                         android:textColor="@color/Black"
                         android:textSize="11sp" />
 
@@ -163,7 +184,7 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/nominalplan"
+                        android:id="@+id/nominal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Tunggakan"
@@ -171,42 +192,72 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginBottom="10dp"-->
+                <!--                    android:orientation="horizontal">-->
 
-                    <Button
-                        android:id="@+id/print"
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/red"
-                        android:background="@drawable/mybutton"
-                        android:backgroundTintMode="add"
-                        android:layout_marginEnd="2dp"
-                        android:layout_marginStart="2dp"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:text="@string/print" />
-                    <Button
-                        android:id="@+id/settlement"
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/mybutton"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/red"
-                        android:backgroundTintMode="add"
-                        android:textColor="@color/white"
-                        android:textSize="10sp"
-                        android:text="Settlement" />
+                <!--                    <Button-->
+                <!--                        android:id="@+id/print"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_weight="2"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:backgroundTint="@color/red"-->
+                <!--                        android:background="@drawable/mybutton"-->
+                <!--                        android:backgroundTintMode="add"-->
+                <!--                        android:layout_marginEnd="2dp"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        android:textSize="10sp"-->
+                <!--                        android:text="@string/print" />-->
+                <!--                    <Button-->
+                <!--                        android:id="@+id/settlement"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_weight="2"-->
+                <!--                        android:background="@drawable/mybutton"-->
+                <!--                        android:layout_marginStart="2dp"-->
+                <!--                        android:layout_marginEnd="2dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:backgroundTint="@color/red"-->
+                <!--                        android:backgroundTintMode="add"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        android:textSize="10sp"-->
+                <!--                        android:text="Settlement" />-->
 
-                </LinearLayout>
+                <!--                </LinearLayout>-->
             </LinearLayout>
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/approve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ceklist"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/checklist"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/pending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/ceklist"
+                    android:gravity="center_vertical"
+                    android:src="@drawable/pending"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

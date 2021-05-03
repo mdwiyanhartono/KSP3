@@ -52,11 +52,11 @@ public class Constants {
     static final String Os2 = "Os";
     static final String Total_Kewajiban2 = "Total_Kewajiban";
     static final String Alamat2 = "Alamat";
-    static final String NASABAH_BAYAR = "nasabahbayar";
+    static final String anggota_BAYAR = "anggotabayar";
     static final String BERTEMU = "bertemu ";
     static final String NOMINAL_BAYAR = "nominal_bayar";
     static final String LOKASIBERTEMU = "lokasibertemmu";
-    static final String KARAKTERNASABAH = "karakternasabah";
+    static final String KARAKTERanggota = "karakteranggota";
     static final String RESUME = "resume";
     static final String BUKTIBAYAR = "buktibayar";
     static final String IMAGE = "photo";
@@ -98,7 +98,7 @@ public class Constants {
 
     static final String BERTEMUDGN = "bertemu_dengan ";
     static final String KEBERADAAN_ASET = "keberadaan_aset";
-    static final String PKERJAAN_NASABAH = "pekerjaan_nasabah";
+    static final String PKERJAAN_anggota = "pekerjaan_anggota";
     static final String TANGGALGAJIAN = "tanggal_gajian";
     static final String POSISI_JENISUSAHA = "posisi_jenisusaha";
     static final String KONDISIJAMINAN = "kondisi_jaminan";
@@ -174,7 +174,7 @@ public class Constants {
     static final String ketkarakter = "ketkarakter";
     static final String negatifissue = "negatifissue";
     static final String actionplan = "actionplan";
-    static final String resumenasabah = "resumenasabah";
+    static final String resumeanggota = "resumeanggota";
     static final String totaltunggakan = "totaltunggakan";
     static final String totalbayar = "totalbayar";
     static final String perkiraan = "perkiraan";
@@ -255,8 +255,8 @@ public class Constants {
             ",Alamat TEXT NOT NULL,tanggalasign TEXT );";
 
     static final String CREATE_TB2 ="CREATE TABLE TBHASILINVENTORYCOLLECT(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"name TEXT,"+"No_Loan TEXT,"+"Cycle TEXT,"+" Os TEXT,"+"Total_Kewajiban TEXT,"+"Alamat TEXT ," +
-            "nasabahbayar TEXT,"+"bertemu TEXT ,"+"nominal_bayar INTEGER,"+"lokasibertemmu TEXT ," +
-            "karakternasabah TEXT,"+"resume TEXT,"+"buktibayar TEXT,"+"photo TEXT ,"+"tanggalasign TEXT ," +
+            "anggotabayar TEXT,"+"bertemu TEXT ,"+"nominal_bayar INTEGER,"+"lokasibertemmu TEXT ," +
+            "karakteranggota TEXT,"+"resume TEXT,"+"buktibayar TEXT,"+"photo TEXT ,"+"tanggalasign TEXT ," +
             ""+"tanggalproses TEXT ,"+"status TEXT ,"+" statussattlement INTEGER  );";
 
     static final String CREATE_TB3="CREATE TABLE "+TB_NAME3+" ("+ROW_IDUSR+" INTEGER PRIMARY KEY AUTOINCREMENT,"+ROW_NAMAUSR+" TEXT NOT NULL,"+ROW_AREA+" TEXT NOT NULL,"+ROW_PASSUSR+" TEXT NOT NULL ,"+ROW_STATUSUSR+" TEXT NOT NULL,"+ROW_IDUSUSRSRV+" TEXT NOT NULL,"+ROW_BRANCH+" TEXT NOT NULL);";
@@ -266,7 +266,7 @@ public class Constants {
     static final String CREATE_TB5="CREATE TABLE TBINVENTORYSURVEY(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"name TEXT NOT NULL,"+"No_Loan TEXT NOT NULL , "+"Cycle TEXT NOT NULL, "+" Os TEXT NOT NULL,"+"Tanggal TEXT NOT NULL,Alamat TEXT NOT NULL,tanggalasign TEXT );";
 
     static final String CREATE_TB6="CREATE TABLE TBHASILINVENTORYSURVEY(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"name TEXT NOT NULL,"+"No_Loan TEXT NOT NULL , "+"Cycle TEXT NOT NULL, "+" Os TEXT NOT NULL,"+"Tanggal TEXT NOT NULL,"+"Alamat TEXT NOT NULL," +
-            ""+"bertemu_dengan TEXT NOT NULL,"+"keberadaan_aset TEXT NOT NULL,"+"pekerjaan_nasabah TEXT NOT NULL,"+"tanggal_gajian TEXT NOT NULL,"+"posisi_jenisusaha TEXT NOT NULL,"+"kondisi_jaminan TEXT NOT NULL,"+"document1 TEXT NOT NULL,"+"document2 TEXT NOT NULL,"+"document3 TEXT NOT NULL,"+"document4 TEXT NOT NULL," +
+            ""+"bertemu_dengan TEXT NOT NULL,"+"keberadaan_aset TEXT NOT NULL,"+"pekerjaan_anggota TEXT NOT NULL,"+"tanggal_gajian TEXT NOT NULL,"+"posisi_jenisusaha TEXT NOT NULL,"+"kondisi_jaminan TEXT NOT NULL,"+"document1 TEXT NOT NULL,"+"document2 TEXT NOT NULL,"+"document3 TEXT NOT NULL,"+"document4 TEXT NOT NULL," +
             ""+"tanggalasign TEXT ,"+"tanggalproses TEXT ,"+"status TEXT, photo TEXT);";
 
     static final String CREATE_TB7="CREATE TABLE TBNETWORK(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"ipaddress TEXT NOT NULL,port TEXT);";
@@ -313,8 +313,8 @@ public class Constants {
             ","+ROW_COS_LON_RAD+" REAL " +
             ","+ROW_SIN_LON_RAD+" REAL);";
 
-    static final String CREATE_TB12 ="CREATE TABLE TBHASILINVENTORYCOLLECTnew(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"No_Loan TEXT,"+"acctno TEXT,"+" cif TEXT,"+"bertemunasabah TEXT ,"+"bertemudengan TEXT ,"+"nasabahbayar TEXT,"+"nominal_bayar INTEGER,"+"lokasibertemmu TEXT ," +
-            "karakternasabah TEXT,"+"resume TEXT,"+"buktibayar TEXT,"+"photo TEXT ,"+"tanggalasign TEXT ," +
+    static final String CREATE_TB12 ="CREATE TABLE TBHASILINVENTORYCOLLECTnew(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"No_Loan TEXT,"+"acctno TEXT,"+" cif TEXT,"+"bertemuanggota TEXT ,"+"bertemudengan TEXT ,"+"anggotabayar TEXT,"+"nominal_bayar INTEGER,"+"lokasibertemmu TEXT ," +
+            "karakteranggota TEXT,"+"resume TEXT,"+"buktibayar TEXT,"+"photo TEXT ,"+"tanggalasign TEXT ," +
             ""+"tanggalproses TEXT ,"+"status TEXT );";
 
     static final String CREATE_TB13="CREATE TABLE "+TB_NAME13+"("+ID+" INTEGER PRIMARY KEY AUTOINCREMENT " +
@@ -332,7 +332,7 @@ public class Constants {
             ","+ketkarakter+" TEXT "+
             ","+negatifissue+" TEXT "+
             ","+actionplan+" TEXT "+
-            ","+resumenasabah+" TEXT "+
+            ","+resumeanggota+" TEXT "+
             ","+totaltunggakan+" TEXT "+
             ","+totalbayar+" TEXT "+
             ","+perkiraan+" TEXT "+

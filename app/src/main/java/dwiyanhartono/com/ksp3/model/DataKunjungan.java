@@ -16,10 +16,12 @@ public class DataKunjungan {
     private String statusactionplan;
     @SerializedName("f_tujuan")
     private String tujuan;
-    @SerializedName("f_nama_nasabah")
+    @SerializedName("f_nama_anggota")
     private String namadebitur;
     @SerializedName("f_cif")
     private String cif;
+    @SerializedName("f_loanID")
+    private String loanID;
     @SerializedName("f_hasilkunjungan")
     private String hasilkunjungan;
     @SerializedName("f_keterangan_hasilkunjungan")
@@ -42,7 +44,7 @@ public class DataKunjungan {
     private String actionplan;
     @SerializedName("f_date_actionplan")
     private String dateactionplan;
-    @SerializedName("f_resumenasabah")
+    @SerializedName("f_resumeanggota")
     private String resume;
     @SerializedName("f_total_tunggakan")
     private String totaltunggakan;
@@ -55,9 +57,18 @@ public class DataKunjungan {
     @SerializedName("f_notif")
     private String notif;
 
+    public String getLoanID() {
+        return loanID;
+    }
+
+    public void setLoanID(String loanID) {
+        this.loanID = loanID;
+    }
+
     public String getIddata() {
         return iddata;
     }
+
 
     public void setIddata(String iddata) {
         this.iddata = iddata;

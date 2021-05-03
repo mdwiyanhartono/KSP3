@@ -103,12 +103,12 @@ public class ActivityHistorycal extends BaseActivity
                             String bertemu = mItems.get(i).getBertemu();
                             String lokasibertemu = mItems.get(i).getLokasibertemu();
                             String karakter = mItems.get(i).getKarakter();
-                            String resumenasabah = mItems.get(i).getResumenasabah();
+                            String resumeanggota = mItems.get(i).getResumeanggota();
                             String actionplan = mItems.get(i).getActionplan();
                             String tglvisit = mItems.get(i).getTglvisit();
 
                             DataHistory data = new DataHistory(kunjungan, totalbayar, bertemu, lokasibertemu,
-                                    karakter, resumenasabah, actionplan,tglvisit);
+                                    karakter, resumeanggota, actionplan,tglvisit);
 
                             datahistory.add(data);
                         }*/
@@ -256,63 +256,11 @@ public class ActivityHistorycal extends BaseActivity
 
         } else if (id == R.id.nav_manage) {
             conn = new Conectiondetector(ActivityHistorycal.this);
-            if (conn.isConected()) {
-                ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-                getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                    @Override
-                    public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                        String kode = response.body() != null ? response.body().getKode() : "9";
-                        if (kode.equals("1")) {
-                            DBAdapter2 db = new DBAdapter2(ActivityHistorycal.this);
-                            db.openDB();
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                            db.close();
-                            Intent inten = new Intent(ActivityHistorycal.this, SplashScreen.class);
-                            startActivity(inten);
-                            finish();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                        DBAdapter2 db = new DBAdapter2(ActivityHistorycal.this);
-                        db.openDB();
-                        String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                        long result = db.addlogout(id_user, date, "1");
-                        if (result > 0) {
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                        }
-                        db.close();
-                        Intent inten = new Intent(ActivityHistorycal.this, SplashScreen.class);
-                        startActivity(inten);
-                        finish();
-                    }
-                });
+            if (conn.isConected()) {
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityHistorycal.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                }
-                db.close();
-                Intent inten = new Intent(ActivityHistorycal.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
         }
 

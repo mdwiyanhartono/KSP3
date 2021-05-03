@@ -24,11 +24,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import dwiyanhartono.com.ksp3.base.BaseActivity;
 import dwiyanhartono.com.ksp3.database.DBAdapter2;
 import dwiyanhartono.com.ksp3.model.DataTesimage;
 import dwiyanhartono.com.ksp3.model.DataTesimage_1;
 
-public class TesImageActivityList extends AppCompatActivity implements AdapterTesimageList.OnItemClickListener {
+public class TesImageActivityList extends BaseActivity implements AdapterTesimageList.OnItemClickListener {
 
     Button btnviewimage;
     ImageView imageView;
@@ -74,7 +75,7 @@ public class TesImageActivityList extends AppCompatActivity implements AdapterTe
 
     public String getFileName(String imageNameByTime) {
         String filename = "";
-        File file = new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys").getAbsolutePath(), "AppsPhoto");
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -161,7 +162,7 @@ public class TesImageActivityList extends AppCompatActivity implements AdapterTe
             AlertDialog.Builder alta = new AlertDialog.Builder(TesImageActivityList.this);
             alta.setTitle("Error");
             alta.setIcon(R.drawable.warning);
-            alta.setMessage("Gagal Update");
+            alta.setMessage("gagal Update");
             alta.setCancelable(false);
             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                 @Override

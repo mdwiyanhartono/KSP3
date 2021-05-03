@@ -13,7 +13,7 @@ import dwiyanhartono.com.ksp3.model.Dataplanvisit;
 
 public class AdapterPlanvisit extends RecyclerView.Adapter<HolderPlanvisit> {
 
-    String alamatusaha,dpd,loanid,email,cif;
+    String alamatusaha,dpd,loanid,email,cif,norek;
     private List<Dataplanvisit> assignment;
     private OnItemClickListener onItemClickListener;
 
@@ -41,7 +41,7 @@ public class AdapterPlanvisit extends RecyclerView.Adapter<HolderPlanvisit> {
         holder.totaltunggakantxt.setText(dm.getTotaltunggakan());
         holder.alamat.setText(dm.getAlamat());
         holder.loan.setText(dm.getLoanid());
-
+        norek = dm.getAcctno();
         alamatusaha = dm.getAlamatusaha();
         email = dm.getEmail();
         dpd = dm.getDpd();
@@ -51,7 +51,7 @@ public class AdapterPlanvisit extends RecyclerView.Adapter<HolderPlanvisit> {
         holder.btninputvisit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onButonVisitClick(holder.ciftxt.getText().toString(),holder.namatxt.getText().toString(),holder.alamat.getText().toString(),dm.getAlamatusaha(),dm.getEmail(),holder.bucketeomtxt.getText().toString(),dm.getDpd(),holder.loan.getText().toString(),dm.getTotaltunggakan(),dm.getAngsuran(),dm.getNotlp());
+                onItemClickListener.onButonVisitClick(norek,holder.ciftxt.getText().toString(),holder.namatxt.getText().toString(),holder.alamat.getText().toString(),dm.getAlamatusaha(),dm.getEmail(),holder.bucketeomtxt.getText().toString(),dm.getDpd(),holder.loan.getText().toString(),dm.getTotaltunggakan(),dm.getAngsuran(),dm.getNotlp());
             }
         });
         holder.btndetail.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class AdapterPlanvisit extends RecyclerView.Adapter<HolderPlanvisit> {
 
         void onButonDetailClick(String cif);
 
-        void onButonVisitClick(String cif, String nama, String alamatusaha, String email, String string, String dpd, String s, String loanid, String totaldue, String angsuran,String notlp);
+        void onButonVisitClick(String norek ,String cif, String nama, String alamatusaha, String email, String string, String dpd, String s, String loanid, String totaldue, String angsuran,String notlp);
 
         void onButonHistoryClick(String loan, String cif);
 

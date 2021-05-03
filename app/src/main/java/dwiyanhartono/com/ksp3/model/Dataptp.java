@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Dataptp {
 
-    @SerializedName("f_nama_nasabah")
-    private String namanasabah;
+    @SerializedName("f_nama_anggota")
+    private String namaanggota;
     @SerializedName("f_cif")
     private String cif;
     @SerializedName("f_loanid")
@@ -39,12 +39,12 @@ public class Dataptp {
         this.nominal = nominal;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {

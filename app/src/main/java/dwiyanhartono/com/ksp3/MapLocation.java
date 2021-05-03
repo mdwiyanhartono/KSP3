@@ -36,7 +36,7 @@ public class MapLocation extends Service implements LocationListener {
 
     public void saveLocationLocalStorage(String user, String lat, String lng, String datetime) {
         DBAdapter dbAdapter = new DBAdapter(getApplicationContext());
-        //dbAdapter.addloc( user,lat,lng,"BELUM TERKIRIM", datetime);
+        //dbAdapter.addloc( user,lat,lng,"BELUM terkirim", datetime);
     }
 
     @SuppressLint("MissingPermission")

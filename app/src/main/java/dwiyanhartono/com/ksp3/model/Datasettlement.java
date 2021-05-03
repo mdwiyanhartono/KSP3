@@ -4,26 +4,38 @@ import com.google.gson.annotations.SerializedName;
 
 public class Datasettlement {
 
-    @SerializedName("f_nama_nasabah")
-    private String namanasabah;
+    @SerializedName("f_nama_anggota")
+    private String namaanggota;
+    @SerializedName("f_id")
+    private String id;
     @SerializedName("f_cif")
     private String cif;
+    @SerializedName("f_ld")
+    private String ld;
     @SerializedName("f_norefrence")
     private String norefrence;
     @SerializedName("f_tunggakan")
     private String tunggakan;
     @SerializedName("f_nominal_pelunasan")
     private String nominal;
-    @SerializedName("statussettlement")
-    private String statussettlement;
+    @SerializedName("norek")
+    private String norek;
+    private boolean isChecked;
 
-
-    public String getStatussettlement() {
-        return statussettlement;
+    public boolean isChecked() {
+        return isChecked;
     }
 
-    public void setStatussettlement(String statussettlement) {
-        this.statussettlement = statussettlement;
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public String getNorek() {
+        return norek;
+    }
+
+    public void setNorek(String norek) {
+        this.norek = norek;
     }
 
     public String getNorefrence() {
@@ -38,16 +50,24 @@ public class Datasettlement {
         return nominal;
     }
 
+    public String getLd() {
+        return ld;
+    }
+
+    public void setLd(String ld) {
+        this.ld = ld;
+    }
+
     public void setNominal(String nominal) {
         this.nominal = nominal;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {
@@ -56,6 +76,14 @@ public class Datasettlement {
 
     public void setCif(String cif) {
         this.cif = cif;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTunggakan() {

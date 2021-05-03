@@ -9,7 +9,16 @@ import java.util.List;
 public class ResponsModelSettlement {
 
     String  kode;
+    String  message;
     List<Datasettlement> result;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public List<Datasettlement> getResult() {
         return result;

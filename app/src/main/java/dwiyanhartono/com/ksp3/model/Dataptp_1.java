@@ -2,7 +2,7 @@ package dwiyanhartono.com.ksp3.model;
 
 public class Dataptp_1 {
 
-    private String namanasabah;
+    private String namaanggota;
     private String cif;
     private String loanid;
     private String hasilkunjungan;
@@ -15,8 +15,8 @@ public class Dataptp_1 {
     private boolean isChecked;
 
 
-    public Dataptp_1(String namanasabah, String cif, String loanid, String hasilkunjungan, String bertemu, String lokasibertemu, String actionplan, String tanggalaction, String nominal) {
-        this.namanasabah = namanasabah;
+    public Dataptp_1(String namaanggota, String cif, String loanid, String hasilkunjungan, String bertemu, String lokasibertemu, String actionplan, String tanggalaction, String nominal) {
+        this.namaanggota = namaanggota;
         this.cif = cif;
         this.loanid = loanid;
         this.hasilkunjungan = hasilkunjungan;
@@ -43,12 +43,12 @@ public class Dataptp_1 {
         this.nominal = nominal;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {

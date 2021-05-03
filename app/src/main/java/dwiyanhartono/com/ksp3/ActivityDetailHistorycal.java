@@ -53,7 +53,7 @@ public class ActivityDetailHistorycal extends BaseActivity
     Adapterrowtable_rs adapter;
     Adapterrowtable_sp adapter2;
     Adapterrowtable_fs adapter3;
-    String code_image, cif ,tglvisit , agentname, loanid;
+    String code_image, cif, tglvisit, agentname, loanid;
 
     Conectiondetector conn;
 
@@ -96,7 +96,6 @@ public class ActivityDetailHistorycal extends BaseActivity
         dateplan.setText(dateplans);
         agent.setText(agentname);
 //        Toast.makeText(this, cif, Toast.LENGTH_SHORT).show();
-
 
 
         rcfs = (RecyclerView) findViewById(R.id.myRecycler);
@@ -159,12 +158,12 @@ public class ActivityDetailHistorycal extends BaseActivity
                             String bertemu = mItems.get(i).getBertemu();
                             String lokasibertemu = mItems.get(i).getLokasibertemu();
                             String karakter = mItems.get(i).getKarakter();
-                            String resumenasabah = mItems.get(i).getResumenasabah();
+                            String resumeanggota = mItems.get(i).getResumeanggota();
                             String actionplan = mItems.get(i).getActionplan();
                             String tglvisit = mItems.get(i).getTglvisit();
 
                             DataHistory data = new DataHistory(kunjungan, totalbayar, bertemu, lokasibertemu,
-                                    karakter, resumenasabah, actionplan,tglvisit);
+                                    karakter, resumeanggota, actionplan,tglvisit);
 
                             datahistory.add(data);
                         }*/
@@ -177,7 +176,7 @@ public class ActivityDetailHistorycal extends BaseActivity
             @Override
             public void onFailure(Call<ResponsModelFs> call, Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(ActivityDetailHistorycal.this, "Error code : fs"+t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ActivityDetailHistorycal.this, "Error code : fs" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -270,7 +269,7 @@ public class ActivityDetailHistorycal extends BaseActivity
 //            finish();
 //            return true;
 //        }
-        if(id == R.id.action_change){
+        if (id == R.id.action_change) {
             Intent inten = new Intent(ActivityDetailHistorycal.this, ChangePassword.class);
             startActivity(inten);
 //            finish();
@@ -300,63 +299,11 @@ public class ActivityDetailHistorycal extends BaseActivity
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
             conn = new Conectiondetector(ActivityDetailHistorycal.this);
-            if (conn.isConected()) {
-                ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-                getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                    @Override
-                    public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                        String kode = response.body() != null ? response.body().getKode() : null;
-                        if (kode.equals("1")) {
-                            DBAdapter2 db = new DBAdapter2(ActivityDetailHistorycal.this);
-                            db.openDB();
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                            db.close();
-                            Intent inten = new Intent(ActivityDetailHistorycal.this, SplashScreen.class);
-                            startActivity(inten);
-                            finish();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                        DBAdapter2 db = new DBAdapter2(ActivityDetailHistorycal.this);
-                        db.openDB();
-                        String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                        long result = db.addlogout(id_user, date, "1");
-                        if (result > 0) {
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                        }
-                        db.close();
-                        Intent inten = new Intent(ActivityDetailHistorycal.this, SplashScreen.class);
-                        startActivity(inten);
-                        finish();
-                    }
-                });
+            if (conn.isConected()) {
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityDetailHistorycal.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                }
-                db.close();
-                Intent inten = new Intent(ActivityDetailHistorycal.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
         }
 
@@ -364,7 +311,9 @@ public class ActivityDetailHistorycal extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    String id_user,nama,email;
+
+    String id_user, nama, email;
+
     private void ceklog() {
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
@@ -378,10 +327,10 @@ public class ActivityDetailHistorycal extends BaseActivity
 
     public void viewimage(View view) {
         Intent intent = new Intent(ActivityDetailHistorycal.this, TesImageActivity.class);
-        intent.putExtra("cif",cif);
-        intent.putExtra("loanid",loanid);
-        intent.putExtra("code_image",code_image);
-        intent.putExtra("tglvisit",tglvisit);
+        intent.putExtra("cif", cif);
+        intent.putExtra("loanid", loanid);
+        intent.putExtra("code_image", code_image);
+        intent.putExtra("tglvisit", tglvisit);
         startActivity(intent);
     }
 }

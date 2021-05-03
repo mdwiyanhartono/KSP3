@@ -29,6 +29,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import dwiyanhartono.com.ksp3.api.ApiRequestData;
 import dwiyanhartono.com.ksp3.api.Retroserver;
+import dwiyanhartono.com.ksp3.base.BaseActivity;
 import dwiyanhartono.com.ksp3.database.DBHelper;
 import dwiyanhartono.com.ksp3.model.ResponsModel;
 import okhttp3.MediaType;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivityPhoto extends AppCompatActivity {
+public class MainActivityPhoto extends BaseActivity {
 
     String i1;
     Intent intent;
@@ -120,7 +121,7 @@ public class MainActivityPhoto extends AppCompatActivity {
             AlertDialog.Builder alta = new AlertDialog.Builder(MainActivityPhoto.this);
             alta.setTitle("Error");
             alta.setIcon(R.drawable.warning);
-            alta.setMessage("Ambil Photo Dulu");
+            alta.setMessage("ambil Photo Dulu");
             alta.setCancelable(false);
             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                 @Override
@@ -132,7 +133,7 @@ public class MainActivityPhoto extends AppCompatActivity {
             });
             alta.create();
             alta.show();
-//            Toast.makeText(this, "Ambil foto dlu", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "ambil foto dlu", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -258,7 +259,7 @@ public class MainActivityPhoto extends AppCompatActivity {
                             AlertDialog.Builder alta = new AlertDialog.Builder(MainActivityPhoto.this);
                             alta.setTitle("Pesan");
                             alta.setIcon(R.drawable.warning);
-                            alta.setMessage("Data Gagal Di Simpan");
+                            alta.setMessage("Data gagal Di Simpan");
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
@@ -279,7 +280,7 @@ public class MainActivityPhoto extends AppCompatActivity {
                         AlertDialog.Builder alta = new AlertDialog.Builder(MainActivityPhoto.this);
                         alta.setTitle("Error");
                         alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Data Gagal Di Simpan ," + t.getMessage());
+                        alta.setMessage("Data gagal Di Simpan ," + t.getMessage());
                         alta.setCancelable(false);
                         alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                             @Override
@@ -300,11 +301,11 @@ public class MainActivityPhoto extends AppCompatActivity {
             }
         } else
         {
-//            Toast.makeText(this, "Ambil foto dlu", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "ambil foto dlu", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder alta = new AlertDialog.Builder(MainActivityPhoto.this);
             alta.setTitle("Error");
             alta.setIcon(R.drawable.warning);
-            alta.setMessage("Ambil Photo Dulu");
+            alta.setMessage("ambil Photo Dulu");
             alta.setCancelable(false);
             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                 @Override
@@ -327,7 +328,7 @@ public class MainActivityPhoto extends AppCompatActivity {
     /* private void savetodb(String imageNameByTime){
          if (bitmap !=null) {
              database.savePathImage(getFileName(imageNameByTime));
-         } else Toast.makeText(this, "Ambil foto dlu", Toast.LENGTH_SHORT).show(); {}
+         } else Toast.makeText(this, "ambil foto dlu", Toast.LENGTH_SHORT).show(); {}
      }*/
     // Untuk resize bitmap
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
@@ -372,7 +373,7 @@ public class MainActivityPhoto extends AppCompatActivity {
 
     public String getFileName(String imageNameByTime) {
         String filename = "";
-        File file = new File(Environment.getExternalStoragePublicDirectory("iColls").getAbsolutePath(), "AppsPhoto");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys/").getAbsolutePath(), "AppsPhoto");
         if (!file.exists()) {
             file.mkdirs();
         }

@@ -55,14 +55,6 @@ public class AdapterAssignment extends RecyclerView.Adapter<HolderAssignment> {
             holder.ck.setVisibility(View.GONE);
             holder.pending.setVisibility(View.GONE);
             holder.ceklist.setVisibility(View.VISIBLE);
-//            holder.ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    Log.d("Data Posisiton", position + "");
-//                    onItemClickListener.onItemClick(dm.getCif(), isChecked);
-//                    dm.setChecked(isChecked);
-//                }
-//            });
         } else {
             holder.ck.setOnCheckedChangeListener(null);
             holder.ck.setChecked(dm.isChecked());

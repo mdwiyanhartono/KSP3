@@ -70,7 +70,6 @@
                         android:text="Bucket EOM"
                         android:textSize="11sp"
                         android:textColor="@color/Black" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -175,6 +174,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
@@ -229,6 +229,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -259,6 +260,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
@@ -309,7 +311,6 @@
                         android:layout_height="wrap_content"
                         android:textSize="11sp"
                         android:text="Alamat" />
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -341,9 +342,6 @@
                     android:layout_weight="1"
                     android:text="Historical Penanganan"
                     android:textSize="9sp" />
-
-
-
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -375,10 +373,7 @@
                     android:text="Google Maps"
                     android:textSize="9sp"/>
             </LinearLayout>
-
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

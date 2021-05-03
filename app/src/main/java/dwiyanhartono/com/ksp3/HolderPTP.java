@@ -10,17 +10,18 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.RecyclerView;
 
 class HolderPTP extends RecyclerView.ViewHolder implements View.OnClickListener {
-    TextView nominal,tanggalactionplan,namanasabah, cif, loan, hasilkunjungan, bertemu, lokasibertemu, actionplan;
+    TextView nominal,tanggalactionplan,namaanggota, cif, loan, hasilkunjungan, bertemu, lokasibertemu, actionplan;
     Button btninputvisit, btnhistory, btndetail, btnmaps;
 
     LinearLayout lytglptp;
     AppCompatCheckBox ck;
+
     ItemClickListner itemClickListener;
 
     public HolderPTP(@NonNull View itemView) {
         super(itemView);
 
-        namanasabah = (TextView) itemView.findViewById(R.id.namanasabah);
+        namaanggota = (TextView) itemView.findViewById(R.id.namaanggota);
         cif = (TextView) itemView.findViewById(R.id.cif);
 //        loan = (TextView) itemView.findViewById(R.id.loanid);
         hasilkunjungan = (TextView) itemView.findViewById(R.id.hasilkunjungan);
@@ -29,6 +30,7 @@ class HolderPTP extends RecyclerView.ViewHolder implements View.OnClickListener 
         actionplan= (TextView) itemView.findViewById(R.id.actionplan);
         tanggalactionplan = (TextView) itemView.findViewById(R.id.tanggalactionplan);
         nominal = (TextView) itemView.findViewById(R.id.nominalplan);
+        ck = itemView.findViewById(R.id.ck);
 
     }
 

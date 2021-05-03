@@ -1,5 +1,6 @@
 package dwiyanhartono.com.ksp3.api;
 
+import dwiyanhartono.com.ksp3.model.DataCekSaldo;
 import dwiyanhartono.com.ksp3.model.ReqBodyApplyAssignment;
 import dwiyanhartono.com.ksp3.model.ReqBodyAssignment;
 import dwiyanhartono.com.ksp3.model.ReqBodyAssignmentcari;
@@ -23,6 +24,7 @@ import dwiyanhartono.com.ksp3.model.Requestupcontact;
 import dwiyanhartono.com.ksp3.model.RespondModelHistorical;
 import dwiyanhartono.com.ksp3.model.ResponsModel;
 import dwiyanhartono.com.ksp3.model.ResponsModelAP;
+import dwiyanhartono.com.ksp3.model.ResponsModelCekSaldo;
 import dwiyanhartono.com.ksp3.model.ResponsModelChangePswd;
 import dwiyanhartono.com.ksp3.model.ResponsModelContact;
 import dwiyanhartono.com.ksp3.model.ResponsModelDatauser;
@@ -84,6 +86,11 @@ public interface ApiRequestData {
 
     // done
     @Headers("Content-Type: application/json")
+    @POST("ceksaldo")
+    Call<ResponsModelCekSaldo> ceksaldo(@Body ReqBodyAssignment reqBodyAssignment);
+
+    // done
+    @Headers("Content-Type: application/json")
     @POST("viewassignmentcari")
     Call<ResponsModel> getassignmentcari(@Body ReqBodyAssignmentcari reqBodyAssignmentcari);
 
@@ -101,6 +108,10 @@ public interface ApiRequestData {
     @Headers("Content-Type: application/json")
     @POST("applyassignment")
     Call<ResponsModel> sendassignment(@Body ReqBodyApplyAssignment reqBodyApplyAssignment);
+    // done
+    @Headers("Content-Type: application/json")
+    @POST("applysettlement")
+    Call<ResponsModelSettlement> sendsettlement(@Body ReqBodyApplyAssignment reqBodyApplyAssignment);
 
     @Headers("Content-Type: application/json")
     @POST("viewplanvisit")
@@ -211,6 +222,7 @@ public interface ApiRequestData {
     ///////////////Download///////////////////////////////////
     @Headers("Content-Type: application/json")
     @POST("downloadacount")
+//    @POST("downloadplanvisit")
     Call<ResponsModelDetailAccount> downloadacount(@Body RequestLogin requestLogin);
 
     @Headers("Content-Type: application/json")
@@ -349,13 +361,13 @@ public interface ApiRequestData {
                                             @Part("f_e_email") RequestBody f_e_email,
                                             @Part("f_hasilkunjungan") RequestBody f_hasilkunjungan,
                                             @Part("f_tgl_ptp") RequestBody f_tgl_ptp,
-                                            @Part("f_bertemunasabah") RequestBody f_bertemunasabah,
+                                            @Part("f_bertemuanggota") RequestBody f_bertemuanggota,
                                             @Part("f_other") RequestBody f_other,
                                             @Part("f_lokasibertemu") RequestBody f_lokasibertemu,
-                                            @Part("f_karakternasabah") RequestBody f_karakternasabah,
+                                            @Part("f_karakteranggota") RequestBody f_karakteranggota,
                                             @Part("f_negatifissue") RequestBody f_negatifissue,
                                             @Part("f_actionplan") RequestBody f_actionplan,
-                                            @Part("f_resumenasabah") RequestBody f_resumenasabah,
+                                            @Part("f_resumeanggota") RequestBody f_resumeanggota,
                                             @Part("f_totalbayar") RequestBody f_totalbayar,
                                             @Part("f_tglvisit") RequestBody f_tglvisit,
                                             @Part("f_tujuan") RequestBody f_tujuan,
@@ -369,7 +381,7 @@ public interface ApiRequestData {
     @Multipart
     @POST("hasilkunjungan")
     Call<ResponsModelcontactupdate> insertkunjungan(@Part("f_tujuan") RequestBody f_tujuan,
-                                                    @Part("f_nama_nasabah") RequestBody f_nama_nasabah,
+                                                    @Part("f_nama_anggota") RequestBody f_nama_anggota,
                                                     @Part("f_cif") RequestBody f_cif,
                                                     @Part("f_hasilkunjungan") RequestBody f_hasilkunjungan,
                                                     @Part("f_keterangan_hasilkunjungan") RequestBody f_keterangan_hasilkunjungan,
@@ -382,7 +394,7 @@ public interface ApiRequestData {
                                                     @Part("f_keterangan_karakter") RequestBody f_keterangan_karakter,
                                                     @Part("f_negatif_issue") RequestBody f_negatif_issue,
                                                     @Part("f_actionplan") RequestBody f_actionplan,
-                                                    @Part("f_resumenasabah") RequestBody f_resumenasabah,
+                                                    @Part("f_resumeanggota") RequestBody f_resumeanggota,
                                                     @Part("f_total_tunggakan") RequestBody f_total_tunggakan,
                                                     @Part("f_total_bayar") RequestBody f_total_bayar,
                                                     @Part("f_perkiraan") RequestBody f_perkiraan,

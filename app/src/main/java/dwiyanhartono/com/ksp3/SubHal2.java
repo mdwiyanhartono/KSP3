@@ -170,7 +170,7 @@ public class SubHal2 extends BaseActivity implements AdapterAssignment.OnItemCli
         pdLoading.setCancelable(false);
         pdLoading.show();
         ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-        Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur,id_user));
+        Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur,id_user,""));
         getdata.enqueue(new Callback<ResponsModel>() {
             @Override
             public void onResponse(Call<ResponsModel> call, Response<ResponsModel> response) {
@@ -199,7 +199,7 @@ public class SubHal2 extends BaseActivity implements AdapterAssignment.OnItemCli
                     AlertDialog.Builder alta = new AlertDialog.Builder(SubHal2.this);
                     alta.setTitle("Pesan");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Data Gagal Di Kirim Ke Server , Silahkan periksa Jaringan Internet Anda!!!");
+                    alta.setMessage("Data gagal Di Kirim Ke Server , silahkan periksa Jaringan Internet Anda!!!");
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -221,7 +221,7 @@ public class SubHal2 extends BaseActivity implements AdapterAssignment.OnItemCli
                 AlertDialog.Builder alta = new AlertDialog.Builder(SubHal2.this);
                 alta.setTitle("Pesan");
                 alta.setIcon(R.drawable.warning);
-                alta.setMessage("Data Gagal Di Kirim Ke Server ,"+t.getMessage()+ "!!!");
+                alta.setMessage("Data gagal Di Kirim Ke Server ,"+t.getMessage()+ "!!!");
                 alta.setCancelable(false);
                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                     @Override

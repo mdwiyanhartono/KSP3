@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.RecyclerView;
 
 class HolderSub3 extends RecyclerView.ViewHolder implements View.OnClickListener {
-    TextView namanasabah, cif, loan, hasilkunjungan, bertemu, lokasibertemu, actionplan;
+    TextView namaanggota, cif, loan, hasilkunjungan, bertemu, lokasibertemu, actionplan;
     Button btninputvisit, btnhistory, btndetail, btnmaps;
 
     LinearLayout lytglptp;
@@ -20,7 +20,7 @@ class HolderSub3 extends RecyclerView.ViewHolder implements View.OnClickListener
     public HolderSub3(@NonNull View itemView) {
         super(itemView);
 
-        namanasabah = (TextView) itemView.findViewById(R.id.namanasabah);
+        namaanggota = (TextView) itemView.findViewById(R.id.namaanggota);
         cif = (TextView) itemView.findViewById(R.id.cif);
 //        loan = (TextView) itemView.findViewById(R.id.loanid);
         hasilkunjungan = (TextView) itemView.findViewById(R.id.hasilkunjungan);

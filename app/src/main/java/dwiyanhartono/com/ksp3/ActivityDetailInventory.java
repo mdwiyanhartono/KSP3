@@ -473,7 +473,7 @@ public class ActivityDetailInventory extends BaseActivity
                             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityDetailInventory.this);
                             alta.setTitle("Pesan");
                             alta.setIcon(R.drawable.warning);
-                            alta.setMessage("Data Gagal Di Kirim Ke Server");
+                            alta.setMessage("Data gagal Di Kirim Ke Server");
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
@@ -494,7 +494,7 @@ public class ActivityDetailInventory extends BaseActivity
                         AlertDialog.Builder alta = new AlertDialog.Builder(ActivityDetailInventory.this);
                         alta.setTitle("Pesan");
                         alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Data Gagal Di Kirim Ke Server, Karna :" + t.getMessage());
+                        alta.setMessage("Data gagal Di Kirim Ke Server, Karna :" + t.getMessage());
                         alta.setCancelable(false);
                         alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                             @Override
@@ -694,63 +694,11 @@ public class ActivityDetailInventory extends BaseActivity
 
         } else if (id == R.id.nav_manage) {
             conn = new Conectiondetector(ActivityDetailInventory.this);
-            if (conn.isConected()) {
-                ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                Call<ResponsModelChangePswd> getdata = api.sendLogout(new ReqBodySubHal1(id_user));
-                getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                    @Override
-                    public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                        String kode = response.body().getKode();
-                        if (kode.equals("1")) {
-                            DBAdapter2 db = new DBAdapter2(ActivityDetailInventory.this);
-                            db.openDB();
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                            db.close();
-                            Intent inten = new Intent(ActivityDetailInventory.this, SplashScreen.class);
-                            startActivity(inten);
-                            finish();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                        DBAdapter2 db = new DBAdapter2(ActivityDetailInventory.this);
-                        db.openDB();
-                        String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                        long result = db.addlogout(id_user, date, "1");
-                        if (result > 0) {
-                            db.Deleteuser();
-                            db.deleteparameter();
-                            db.deletekunjunganall("1");
-                            db.deletekpall();
-                            db.deleteselfcuredall();
-                        }
-                        db.close();
-                        Intent inten = new Intent(ActivityDetailInventory.this, SplashScreen.class);
-                        startActivity(inten);
-                        finish();
-                    }
-                });
+            if (conn.isConected()) {
+                notifLogout(1);
             } else {
-                DBAdapter2 db = new DBAdapter2(ActivityDetailInventory.this);
-                db.openDB();
-                String date = new SimpleDateFormat("yyyy_MM_dd_HHmmss", Locale.getDefault()).format(new Date());
-                long result = db.addlogout(id_user, date, "1");
-                if (result > 0) {
-                    db.Deleteuser();
-                    db.deleteparameter();
-                    db.deletekunjunganall("1");
-                    db.deletekpall();
-                    db.deleteselfcuredall();
-                }
-                db.close();
-                Intent inten = new Intent(ActivityDetailInventory.this, SplashScreen.class);
-                startActivity(inten);
-                finish();
+                notifLogout(0);
             }
         }
 
@@ -758,4 +706,5 @@ public class ActivityDetailInventory extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

@@ -3,7 +3,7 @@ package dwiyanhartono.com.ksp3.model;
 public class Datasub3_1 {
 
 
-     String namanasabah;
+     String namaanggota;
      String cif;
      String loanid;
      String hasilkunjungan;
@@ -11,8 +11,8 @@ public class Datasub3_1 {
      String lokasibertemu;
      String actionplan;
 
-    public Datasub3_1(String namanasabah, String cif, String loanid, String hasilkunjungan, String bertemu, String lokasibertemu, String actionplan) {
-        this.namanasabah = namanasabah;
+    public Datasub3_1(String namaanggota, String cif, String loanid, String hasilkunjungan, String bertemu, String lokasibertemu, String actionplan) {
+        this.namaanggota = namaanggota;
         this.cif = cif;
         this.loanid = loanid;
         this.hasilkunjungan = hasilkunjungan;
@@ -21,12 +21,12 @@ public class Datasub3_1 {
         this.actionplan = actionplan;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {

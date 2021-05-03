@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
@@ -80,6 +81,7 @@ public class ActivityLogin extends AppCompatActivity {
     private List<Datasub8> list3 = new ArrayList<>();
     private List<Datakp> list4 = new ArrayList<>();
     private int REQUEST_CODE = 11;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,18 +96,18 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
-    private  void  cekupdate(){
-        AppUpdateManager updateManager = AppUpdateManagerFactory.create(ActivityLogin.this);
-        Task<AppUpdateInfo> appUpdateInfoTask = updateManager.getAppUpdateInfo();
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                try {
-                    updateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, ActivityLogin.this, REQUEST_CODE);
-                } catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    private void cekupdate() {
+//        AppUpdateManager updateManager = AppUpdateManagerFactory.create(ActivityLogin.this);
+//        Task<AppUpdateInfo> appUpdateInfoTask = updateManager.getAppUpdateInfo();
+//        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+//            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+//                try {
+//                    updateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, ActivityLogin.this, REQUEST_CODE);
+//                } catch (IntentSender.SendIntentException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
     }
 
@@ -115,7 +117,7 @@ public class ActivityLogin extends AppCompatActivity {
         if (requestCode == REQUEST_CODE) {
             Toast.makeText(this, "Start Download", Toast.LENGTH_SHORT).show();
             if (resultCode != RESULT_OK) {
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "gagal", Toast.LENGTH_SHORT).show();
                 Log.d("Update", "onActivityResult: Update Failed" + resultCode);
             } else {
                 Toast.makeText(this, "Finish", Toast.LENGTH_SHORT).show();
@@ -240,7 +242,7 @@ public class ActivityLogin extends AppCompatActivity {
                             }
                         });
                         final AlertDialog alertDialog = alta.create();
-                        if (!ActivityLogin.this.isFinishing()){
+                        if (!ActivityLogin.this.isFinishing()) {
                             alertDialog.show();
                         }
                     }
@@ -252,7 +254,7 @@ public class ActivityLogin extends AppCompatActivity {
                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityLogin.this);
                     alta.setTitle("Error");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Terjadi Masalah Pada Jaringan Anda");
+                    alta.setMessage("Terjadi Masalah Pada Jaringan Anda :" + t.getMessage());
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -262,7 +264,7 @@ public class ActivityLogin extends AppCompatActivity {
                     });
 
                     final AlertDialog alertDialog = alta.create();
-                    if (!ActivityLogin.this.isFinishing()){
+                    if (!ActivityLogin.this.isFinishing()) {
                         alertDialog.show();
                     }
 
@@ -294,6 +296,7 @@ public class ActivityLogin extends AppCompatActivity {
                         String kethasilkunjungan = list2.get(i).getKethasilkunjungan();
                         String namadebitur = list2.get(i).getNamadebitur();
                         String cif = list2.get(i).getCif();
+                        String ld = list2.get(i).getLoanID();
                         String statusactionplan = list2.get(i).getStatusactionplan();
                         String bertemu = list2.get(i).getBertemu();
                         String ketbertemu = list2.get(i).getKetbertemu();
@@ -313,7 +316,7 @@ public class ActivityLogin extends AppCompatActivity {
                         String ketkarakter = list2.get(i).getKetkarakter();
                         String notif = list2.get(i).getNotif();
 
-                        db.addkunjungan(iddata, cif, codeimage, tujuan, hasilkunjungan, kethasilkunjungan, namadebitur, statusactionplan, bertemu, ketbertemu, lokasibertemu, ketlokasi, karakter, negatifissue, actionplan, dateactionplan, resume, totaltunggakan, totalbayar, perkiraan, tgvisit, lat, lng, "1", "", "", "", "", ketkarakter,notif);
+                        db.addkunjungan(iddata, cif, codeimage, tujuan, hasilkunjungan, kethasilkunjungan, namadebitur, statusactionplan, bertemu, ketbertemu, lokasibertemu, ketlokasi, karakter, negatifissue, actionplan, dateactionplan, resume, totaltunggakan, totalbayar, perkiraan, tgvisit, lat, lng, "1", "", "", "", "", ketkarakter, notif, "", "", ld);
 
                         x++;
                     }
@@ -363,12 +366,13 @@ public class ActivityLogin extends AppCompatActivity {
                         if (a.getInt(0) > 0) {
                             db.updatelist(desc, code, status);
                         } else {
-                            db.addlist(desc,value, type, code, status);
+                            db.addlist(desc, value, type, code, status);
                         }
 
                         z++;
                     }
                     if (x == z) {
+
                         downloadkunjungan();
                     } else {
                         downloadkunjungan();
@@ -403,7 +407,7 @@ public class ActivityLogin extends AppCompatActivity {
                     int x = 1;
                     int z = list3.size();
                     for (int i = 0; i < list3.size(); i++) {
-                        String nama = list3.get(i).getNamanasabah();
+                        String nama = list3.get(i).getNamaanggota();
                         String cif = list3.get(i).getCif();
                         String date = list3.get(i).getNamaproduk();
 
@@ -418,10 +422,12 @@ public class ActivityLogin extends AppCompatActivity {
                         z++;
                     }
                     if (z == x) {
+
                         downloadbp();
                     } else {
                         downloadbp();
                     }
+
 
                     db.close();
                 }
@@ -443,7 +449,7 @@ public class ActivityLogin extends AppCompatActivity {
         getdata.enqueue(new Callback<ResponsModelSub6>() {
             @Override
             public void onResponse(Call<ResponsModelSub6> call, Response<ResponsModelSub6> response) {
-                String kode = response.body().getKode();
+                String kode = response.body() != null ? response.body().getKode() : "9";
                 if (kode.equals("1")) {
                     DBAdapter2 db = new DBAdapter2(ActivityLogin.this);
                     db.openDB();
@@ -453,7 +459,7 @@ public class ActivityLogin extends AppCompatActivity {
                     int z = list4.size();
                     if (list4.size() > 0) {
                         for (int i = 0; i < list4.size(); i++) {
-                            String nama = list4.get(i).getNamanasabah();
+                            String nama = list4.get(i).getNamaanggota();
                             String cif = list4.get(i).getCif();
                             String actionplan = list4.get(i).getActionplan();
                             String hasilkunjungan = list4.get(i).getHasilkunjungan();
@@ -498,7 +504,7 @@ public class ActivityLogin extends AppCompatActivity {
                             });
 
                             final AlertDialog alertDialog = alta.create();
-                            if (!ActivityLogin.this.isFinishing()){
+                            if (!ActivityLogin.this.isFinishing()) {
                                 alertDialog.show();
                             }
                         } else {
@@ -525,7 +531,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 }
                             });
                             final AlertDialog alertDialog = alta.create();
-                            if (!ActivityLogin.this.isFinishing()){
+                            if (!ActivityLogin.this.isFinishing()) {
                                 alertDialog.show();
                             }
                         }
@@ -554,18 +560,46 @@ public class ActivityLogin extends AppCompatActivity {
                             }
                         });
                         final AlertDialog alertDialog = alta.create();
-                        if (!ActivityLogin.this.isFinishing()){
-                            alertDialog.show();
+                        alertDialog.show();
+                        if (!ActivityLogin.this.isFinishing()) {
+//                            alertDialog.show();
                         }
 
                     }
                     db.close();
+                } else {
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponsModelSub6> call, Throwable t) {
-//                Toast.makeText(ActivityLogin.this, "Gagal download Keep Promise : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                pdLoading.dismiss();
+                AlertDialog.Builder alta = new AlertDialog.Builder(ActivityLogin.this);
+                alta.setTitle("Info");
+                alta.setIcon(R.drawable.checklist);
+                alta.setMessage(message);
+                alta.setCancelable(false);
+                alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (count.equals("0")) {
+                            Intent intent = new Intent(ActivityLogin.this, ChangePassword.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    }
+                });
+
+                final AlertDialog alertDialog = alta.create();
+                alertDialog.show();
+
+                Toast.makeText(ActivityLogin.this, "gagal download Keep Promise : " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 pdLoading.dismiss();
 
             }
@@ -580,7 +614,7 @@ public class ActivityLogin extends AppCompatActivity {
         getdata.enqueue(new Callback<ResponsModelSub6>() {
             @Override
             public void onResponse(Call<ResponsModelSub6> call, Response<ResponsModelSub6> response) {
-                String kode = response.body().getKode();
+                String kode = response.body() != null ? response.body().getKode() : "9";
                 if (kode.equals("1")) {
                     DBAdapter2 db = new DBAdapter2(ActivityLogin.this);
                     db.openDB();
@@ -589,7 +623,7 @@ public class ActivityLogin extends AppCompatActivity {
                     int x = 1;
                     int z = list4.size();
                     for (int i = 0; i < list4.size(); i++) {
-                        String nama = list4.get(i).getNamanasabah();
+                        String nama = list4.get(i).getNamaanggota();
                         String cif = list4.get(i).getCif();
                         String actionplan = list4.get(i).getActionplan();
                         String hasilkunjungan = list4.get(i).getHasilkunjungan();
@@ -627,7 +661,7 @@ public class ActivityLogin extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponsModelSub6> call, Throwable t) {
-//                Toast.makeText(ActivityLogin.this, "Gagal download Broken Promise : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ActivityLogin.this, "gagal download Broken Promise : " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 downloadkp();
             }
         });

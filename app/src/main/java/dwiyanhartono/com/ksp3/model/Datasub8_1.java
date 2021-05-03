@@ -2,24 +2,24 @@ package dwiyanhartono.com.ksp3.model;
 
 public class Datasub8_1 {
 
-    String namanasabah;
+    String namaanggota;
 
     String cif;
 
     String namaproduk;
 
-    public Datasub8_1(String namanasabah, String cif, String namaproduk) {
-        this.namanasabah = namanasabah;
+    public Datasub8_1(String namaanggota, String cif, String namaproduk) {
+        this.namaanggota = namaanggota;
         this.cif = cif;
         this.namaproduk = namaproduk;
     }
 
-    public String getNamanasabah() {
-        return namanasabah;
+    public String getNamaanggota() {
+        return namaanggota;
     }
 
-    public void setNamanasabah(String namanasabah) {
-        this.namanasabah = namanasabah;
+    public void setNamaanggota(String namaanggota) {
+        this.namaanggota = namaanggota;
     }
 
     public String getCif() {

@@ -9,6 +9,7 @@ public class RequestKunjungan {
     private String f_namanasbah;
     private String f_cif;
     private String f_loanid;
+    private String f_angsuran;
     private String f_hasilkunjungan;
     private String f_keteranganhasilkunjungan;
     private String f_tanggalptp;
@@ -22,7 +23,7 @@ public class RequestKunjungan {
     private String f_actionplan;
     private String f_nominalpelunasan;
     private String f_dateactionplan;
-    private String f_resumenasabah;
+    private String f_resumeanggota;
     private String f_totaltunggakan;
     private String f_perkiraanperbaikanbucked;
     private String f_tglvisit;
@@ -32,8 +33,44 @@ public class RequestKunjungan {
     private String f_editalamatusaha;
     private String pihakbank;
     private String notif;
+    private String f_norek;
 
-    public RequestKunjungan(String f_code_image, String f_lat, String f_lng, String f_agentid, String f_tujuan, String f_namanasbah, String f_cif, String f_loanid, String f_hasilkunjungan, String f_keteranganhasilkunjungan, String f_tanggalptp, String f_bertemu, String f_ketbertemu, String f_lokasibertemu, String f_ketlokasi, String f_karakter, String f_ketkarakter, String f_negatifissue, String f_actionplan, String f_nominalpelunasan, String f_dateactionplan, String f_resumenasabah, String f_totaltunggakan, String f_perkiraanperbaikanbucked, String f_tglvisit, String f_totalbayar, String f_editemail, String f_editalamatusaha, String f_editalamatrumah, String pihakbank, String notif) {
+
+    public RequestKunjungan(String f_code_image,
+                            String f_lat,
+                            String f_lng,
+                            String f_agentid,
+                            String f_tujuan,
+                            String f_namanasbah,
+                            String f_cif,
+                            String f_loanid,
+                            String f_hasilkunjungan,
+                            String f_keteranganhasilkunjungan,
+                            String f_tanggalptp,
+                            String f_bertemu,
+                            String f_ketbertemu,
+                            String f_lokasibertemu,
+                            String f_ketlokasi,
+                            String f_karakter,
+                            String f_ketkarakter,
+                            String f_negatifissue,
+                            String f_actionplan,
+                            String f_nominalpelunasan,
+                            String f_dateactionplan,
+                            String f_resumeanggota,
+                            String f_totaltunggakan,
+                            String f_perkiraanperbaikanbucked,
+                            String f_tglvisit,
+                            String f_totalbayar,
+                            String f_editemail,
+                            String f_editalamatrumah,
+                            String f_editalamatusaha,
+                            String pihakbank,
+                            String notif,
+                            String f_angsuran,
+                            String f_norek
+    ) {
+
         this.f_code_image = f_code_image;
         this.f_lat = f_lat;
         this.f_lng = f_lng;
@@ -42,6 +79,7 @@ public class RequestKunjungan {
         this.f_namanasbah = f_namanasbah;
         this.f_cif = f_cif;
         this.f_loanid = f_loanid;
+        this.f_angsuran = f_angsuran;
         this.f_hasilkunjungan = f_hasilkunjungan;
         this.f_keteranganhasilkunjungan = f_keteranganhasilkunjungan;
         this.f_tanggalptp = f_tanggalptp;
@@ -55,48 +93,25 @@ public class RequestKunjungan {
         this.f_actionplan = f_actionplan;
         this.f_nominalpelunasan = f_nominalpelunasan;
         this.f_dateactionplan = f_dateactionplan;
-        this.f_resumenasabah = f_resumenasabah;
+        this.f_resumeanggota = f_resumeanggota;
         this.f_totaltunggakan = f_totaltunggakan;
         this.f_perkiraanperbaikanbucked = f_perkiraanperbaikanbucked;
         this.f_tglvisit = f_tglvisit;
         this.f_totalbayar = f_totalbayar;
+        this.f_editemail = f_editemail;
         this.f_editalamatrumah = f_editalamatrumah;
         this.f_editalamatusaha = f_editalamatusaha;
-        this.f_editemail = f_editemail;
         this.pihakbank = pihakbank;
         this.notif = notif;
+        this.f_norek = f_norek;
     }
 
-    public String getPihakbank() {
-        return pihakbank;
+    public String getF_norek() {
+        return f_norek;
     }
 
-    public void setPihakbank(String pihakbank) {
-        this.pihakbank = pihakbank;
-    }
-
-    public String getF_editemail() {
-        return f_editemail;
-    }
-
-    public void setF_editemail(String f_editemail) {
-        this.f_editemail = f_editemail;
-    }
-
-    public String getF_editalamatusaha() {
-        return f_editalamatusaha;
-    }
-
-    public void setF_editalamatusaha(String f_editalamatusaha) {
-        this.f_editalamatusaha = f_editalamatusaha;
-    }
-
-    public String getF_editalamatrumah() {
-        return f_editalamatrumah;
-    }
-
-    public void setF_editalamatrumah(String f_editalamatrumah) {
-        this.f_editalamatrumah = f_editalamatrumah;
+    public void setF_norek(String f_norek) {
+        this.f_norek = f_norek;
     }
 
     public String getF_code_image() {
@@ -161,6 +176,14 @@ public class RequestKunjungan {
 
     public void setF_loanid(String f_loanid) {
         this.f_loanid = f_loanid;
+    }
+
+    public String getF_angsuran() {
+        return f_angsuran;
+    }
+
+    public void setF_angsuran(String f_angsuran) {
+        this.f_angsuran = f_angsuran;
     }
 
     public String getF_hasilkunjungan() {
@@ -267,12 +290,12 @@ public class RequestKunjungan {
         this.f_dateactionplan = f_dateactionplan;
     }
 
-    public String getF_resumenasabah() {
-        return f_resumenasabah;
+    public String getF_resumeanggota() {
+        return f_resumeanggota;
     }
 
-    public void setF_resumenasabah(String f_resumenasabah) {
-        this.f_resumenasabah = f_resumenasabah;
+    public void setF_resumeanggota(String f_resumeanggota) {
+        this.f_resumeanggota = f_resumeanggota;
     }
 
     public String getF_totaltunggakan() {
@@ -305,6 +328,38 @@ public class RequestKunjungan {
 
     public void setF_totalbayar(String f_totalbayar) {
         this.f_totalbayar = f_totalbayar;
+    }
+
+    public String getF_editemail() {
+        return f_editemail;
+    }
+
+    public void setF_editemail(String f_editemail) {
+        this.f_editemail = f_editemail;
+    }
+
+    public String getF_editalamatrumah() {
+        return f_editalamatrumah;
+    }
+
+    public void setF_editalamatrumah(String f_editalamatrumah) {
+        this.f_editalamatrumah = f_editalamatrumah;
+    }
+
+    public String getF_editalamatusaha() {
+        return f_editalamatusaha;
+    }
+
+    public void setF_editalamatusaha(String f_editalamatusaha) {
+        this.f_editalamatusaha = f_editalamatusaha;
+    }
+
+    public String getPihakbank() {
+        return pihakbank;
+    }
+
+    public void setPihakbank(String pihakbank) {
+        this.pihakbank = pihakbank;
     }
 
     public String getNotif() {

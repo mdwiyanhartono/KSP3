@@ -45,17 +45,17 @@ public class GPSTracker extends Service implements LocationListener {
         curLocation = getLocation();
 
         if (curLocation == null)
-            Toast.makeText(getBaseContext(),"Unable to get your location", Toast.LENGTH_SHORT).show();
-        else{
+            Toast.makeText(getBaseContext(), "Unable to get your location", Toast.LENGTH_SHORT).show();
+        else {
             //Action ketika ambil location awal
-            Toast.makeText(getBaseContext(), String.valueOf( curLocation.getLatitude())+":"+String.valueOf( curLocation.getLongitude()), Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), String.valueOf(curLocation.getLatitude()) + ":" + String.valueOf(curLocation.getLongitude()), Toast.LENGTH_LONG).show();
 
         }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand( intent, flags, startId );
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -65,16 +65,16 @@ public class GPSTracker extends Service implements LocationListener {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        super.onStart( intent, startId );
-        handler.postDelayed( GpsFinder,1 );
+        super.onStart(intent, startId);
+        handler.postDelayed(GpsFinder, 1);
     }
 
-    public Runnable GpsFinder = new Runnable(){
-        public void run(){
+    public Runnable GpsFinder = new Runnable() {
+        public void run() {
             Location tempLoc = getLocation();
-            if(tempLoc!=null)
+            if (tempLoc != null)
                 curLocation = tempLoc;
-            handler.postDelayed(GpsFinder,300000);// register again to start after 1 seconds...
+            handler.postDelayed(GpsFinder, 300000);// register again to start after 1 seconds...
         }
     };
 
@@ -87,9 +87,9 @@ public class GPSTracker extends Service implements LocationListener {
 
     @SuppressLint("MissingPermission")
     public Location getLocation() {
-        Location location=null; // location
+        Location location = null; // location
         try {
-            if(locationManager == null)
+            if (locationManager == null)
                 locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
             // getting GPS status
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -150,14 +150,14 @@ public class GPSTracker extends Service implements LocationListener {
         return location;
     }
 
-    public void stopUsingGPS(){
-        if(locationManager != null){
+    public void stopUsingGPS() {
+        if (locationManager != null) {
             locationManager.removeUpdates(GPSTracker.this);
         }
     }
 
-    public double getLatitude(){
-        if(curLocation != null){
+    public double getLatitude() {
+        if (curLocation != null) {
             latitude = curLocation.getLatitude();
         }
 
@@ -165,8 +165,8 @@ public class GPSTracker extends Service implements LocationListener {
         return latitude;
     }
 
-    public double getLongitude(){
-        if(curLocation != null){
+    public double getLongitude() {
+        if (curLocation != null) {
             longitude = curLocation.getLongitude();
         }
 
@@ -183,19 +183,19 @@ public class GPSTracker extends Service implements LocationListener {
         if (curLocation == null) {
             curLocation = location;
             locationChanged = true;
-        }else if (curLocation.getLatitude() == location.getLatitude() && curLocation.getLongitude() == location.getLongitude()){
+        } else if (curLocation.getLatitude() == location.getLatitude() && curLocation.getLongitude() == location.getLongitude()) {
             locationChanged = false;
             return;
-        }else
+        } else
             locationChanged = true;
 
         curLocation = location;
 
         if (locationChanged) {
-            locationManager.removeUpdates( this );
+            locationManager.removeUpdates(this);
             if (curLocation == null)
-                Toast.makeText(getBaseContext(),"Unable to get your location", Toast.LENGTH_SHORT).show();
-            else{
+                Toast.makeText(getBaseContext(), "Unable to get your location", Toast.LENGTH_SHORT).show();
+            else {
 
                 //Action Jika location berubah
                 //Toast.makeText(getBaseContext(), String.valueOf( curLocation.getLatitude())+":"+String.valueOf( curLocation.getLongitude()), Toast.LENGTH_LONG).show();

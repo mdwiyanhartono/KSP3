@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -27,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +43,8 @@ import dwiyanhartono.com.ksp3.permision.PermissionHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnCheckRootFinishedListener {
     PermissionHelper permissionHelper;
@@ -59,6 +63,21 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
+
+            File file1 = new File(getFilesDir(),"Documents");
+            if (!file1.exists()) {
+                file1.mkdirs();
+            }
+            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "Colsys");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+
+//            File file = new File(Environment.getExternalStorageDirectory(), "Colsys");
+//            if (!file.exists()) {
+//                file.mkdirs();
+//            }
+
 //        cekupdate();
         permissionHelper = new PermissionHelper(this);
 
@@ -66,13 +85,11 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
         CheckRootTask checkRootTask = new CheckRootTask(SplashScreen.this, SplashScreen.this);
         checkRootTask.execute(true);
         cancelAlarm();
-        File file = new File(Environment.getExternalStorageDirectory(), "Colsys");
-        if (!file.exists()) {
-            file.mkdirs();
-        }
+
     }
 
 
@@ -160,7 +177,7 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
 
             @Override
             public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-                Toast.makeText(SplashScreen.this, "Response code : sp_LGTerr_02"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashScreen.this, "Response code : sp_LGTerr_02" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,10 +201,7 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
 
 
         }
-
-
 //        Toast.makeText(activityMain, date, Toast.LENGTH_SHORT).show();
-
     }
 
     private boolean checkAndRequestPermissions() {
@@ -250,7 +264,6 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
     @SuppressLint("RestrictedApi")
     @Override
     public void onCheckRootFinished(boolean isRooted) {
-
         if (isRooted) {
             AlertDialog infoDialog = new AlertDialog.Builder(this)
                     .setTitle("Colsys")
@@ -304,7 +317,7 @@ public class SplashScreen extends AppCompatActivity implements CheckRootTask.OnC
             Toast.makeText(this, "Start Download", Toast.LENGTH_SHORT).show();
             if (resultCode != RESULT_OK) {
                 //cekupdate();
-                Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "gagal", Toast.LENGTH_SHORT).show();
                 Log.d("Update", "onActivityResult: Update Failed" + resultCode);
             } else {
                 Toast.makeText(this, "Finish", Toast.LENGTH_SHORT).show();

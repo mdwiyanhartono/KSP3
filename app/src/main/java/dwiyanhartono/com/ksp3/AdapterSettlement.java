@@ -1,8 +1,10 @@
 package dwiyanhartono.com.ksp3;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,11 @@ public class AdapterSettlement extends RecyclerView.Adapter<HolderSettlement> {
 
     String alamatusaha,dpd,loanid,email;
     private List<Datasettlement> settlement;
+    private OnItemClickListener onItemClickListener;
 
-    public AdapterSettlement(ActivityPTP activityPTP) {
-//        this.onItemClickListener = onItemClickListener;
+    public AdapterSettlement(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
         settlement = new ArrayList<>();
-
     }
 
     @NonNull
@@ -32,13 +34,28 @@ public class AdapterSettlement extends RecyclerView.Adapter<HolderSettlement> {
 
     public void onBindViewHolder(final HolderSettlement holder, final int position) {
         final Datasettlement dm = settlement.get(position);
-        holder.namanasabah.setText(dm.getNamanasabah());
+        holder.namaanggota.setText(dm.getNamaanggota());
         holder.cif.setText(dm.getCif());
         holder.nominal.setText(dm.getNominal());
-        holder.tunggakan.setText(dm.getTunggakan());
-        holder.noref.setText(dm.getNorefrence());
+        holder.LD.setText(dm.getLd());
+        holder.norek.setText(dm.getNorek());
+        holder.ck.setOnCheckedChangeListener(null);
+        holder.ck.setChecked(dm.isChecked());
+        holder.ck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("Data Posisiton", position + "");
+                onItemClickListener.onItemClick(dm.getId(), isChecked);
+                dm.setChecked(isChecked);
+            }
+        });
 
     }
+
+    interface OnItemClickListener {
+        void onItemClick(String id, boolean isChecked);
+    }
+
     @Override
     public int getItemCount() {
         return settlement.size();
@@ -49,4 +66,5 @@ public class AdapterSettlement extends RecyclerView.Adapter<HolderSettlement> {
         this.settlement = settlement;
         notifyDataSetChanged();
     }
+
 }

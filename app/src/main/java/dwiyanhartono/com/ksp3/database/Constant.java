@@ -142,6 +142,7 @@ public class Constant {
 
     static final String CREATE_TB6 = "CREATE TABLE " + TB_NAME6 + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + cif + " TEXT NOT NULL,"
+            + loanid + " TEXT NOT NULL,"
             + facility_type + " TEXT NOT NULL,"
             + plafond + " TEXT NOT NULL,"
             + os + " TEXT NOT NULL,"
@@ -199,6 +200,7 @@ public class Constant {
 
     static final String CREATE_TB9 = "CREATE TABLE " + TB_NAME9 + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + cif + " TEXT ,"
+            + loanid + " TEXT ,"
             + contact_1 + " TEXT ,"
             + contact_2 + " TEXT ,"
             + contact_3 + " TEXT ,"
@@ -259,37 +261,41 @@ public class Constant {
 
     static final String TB_NAME12 = "t_kunjungan";
 
-    static final String CREATE_TB12 = "CREATE TABLE " + TB_NAME12 + " (" + id + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + iddata + " TEXT ,"
-            + lat + " TEXT ,"
-            + lng + " TEXT ,"
-            + cif + " TEXT ,"
-            + codeimage + " TEXT ,"
-            + namadebitur + " TEXT ,"
-            + statusactionplan + " TEXT ,"
-            + tujuan + " TEXT ,"
-            + hasilkunjungan + " TEXT ,"
-            + kethasilkunjungan + " TEXT ,"
-            + bertemu + " TEXT ,"
-            + ketbertemu + " TEXT ,"
-            + lokasibertemu + " TEXT ,"
-            + ketlokasi + " TEXT ,"
-            + karakter + " TEXT ,"
-            + ketkarakter + " TEXT ,"
-            + negatifissue + " TEXT ,"
-            + actionplan + " TEXT ,"
-            + dateactionplan + " TEXT ,"
-            + resume + " TEXT ,"
-            + totaltunggakan + " TEXT ,"
-            + totalbayar + " TEXT ,"
-            + perkiraan + " TEXT ,"
-            + tgvisit + " TEXT ,"
-            + edit_email + " TEXT ,"
-            + edit_alamat + " TEXT ,"
-            + edit_alamatusaha + " TEXT ,"
-            + pihakbank + " TEXT ,"
-            + notif + " TEXT ,"
-            + status_kirim + " TEXT );";
+    static final String CREATE_TB12 = "CREATE TABLE " + TB_NAME12 + " ("
+            + id + " INTEGER PRIMARY KEY AUTOINCREMENT," //0
+            + iddata + " TEXT ," //1
+            + lat + " TEXT ," //2
+            + lng + " TEXT ," //3
+            + cif + " TEXT ," //4
+            + loanid + " TEXT ," //5
+            + codeimage + " TEXT ," //6
+            + namadebitur + " TEXT ," //7
+            + statusactionplan + " TEXT ," //8
+            + tujuan + " TEXT ," //9
+            + hasilkunjungan + " TEXT ," //10
+            + kethasilkunjungan + " TEXT ," //11
+            + bertemu + " TEXT ," //12
+            + ketbertemu + " TEXT ," //13
+            + lokasibertemu + " TEXT ," //14
+            + ketlokasi + " TEXT ," //15
+            + karakter + " TEXT ," //16
+            + ketkarakter + " TEXT ," //17
+            + negatifissue + " TEXT ," //18
+            + actionplan + " TEXT ," //19
+            + dateactionplan + " TEXT ," //20
+            + resume + " TEXT ," //21
+            + totaltunggakan + " TEXT ," //22
+            + totalbayar + " TEXT ," //23
+            + perkiraan + " TEXT ," //24
+            + tgvisit + " TEXT ," //25
+            + edit_email + " TEXT ," //26
+            + edit_alamat + " TEXT ," //27
+            + edit_alamatusaha + " TEXT ," //28
+            + pihakbank + " TEXT ," //29
+            + notif + " TEXT ," //30
+            + angsuran + " TEXT ," //31
+            + norekening + " TEXT ," //32
+            + status_kirim + " TEXT );" ;//33
 
 
     static final String TB_NAME13 = "t_selfcured";

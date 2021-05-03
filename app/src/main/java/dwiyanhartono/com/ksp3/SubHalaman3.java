@@ -60,14 +60,14 @@ public class SubHalaman3 extends BaseActivity {
         if (a.moveToFirst()) {
 //            Toast.makeText(this, "masuk 1", Toast.LENGTH_SHORT).show();
             do {
-                String namanasabah = a.getString( 6 );
+                String namaanggota = a.getString( 6 );
                 String cif = a.getString( 4 );
                 String loanid = a.getString( 1 );
                 String hasilkunjungan = a.getString( 9 );
                 String bertemu = a.getString( 11);
                 String lokasibertemu = a.getString( 13 );
                 String actionplan = a.getString( 18 );
-                Datasub3_1 data = new Datasub3_1(namanasabah,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan);
+                Datasub3_1 data = new Datasub3_1(namaanggota,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan);
                 datacontacted.add(data);
 
 //                Toast.makeText(this, nama1+"/" + cif + "/" + datetime, Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class SubHalaman3 extends BaseActivity {
 //                    if (kode.equals("1")) {
 //                        mItems = response.body().getResult();
 //                        for (int i = 0; i < mItems.size(); i++) {
-//                            String namanasabah = mItems.get(i).getNamanasabah();
+//                            String namaanggota = mItems.get(i).getNamaanggota();
 //                            String cif = mItems.get(i).getCif();
 //                            String loanid = mItems.get(i).getLoanid();
 //                            String hasilkunjungan = mItems.get(i).getHasilkunjungan();
@@ -98,10 +98,10 @@ public class SubHalaman3 extends BaseActivity {
 //                            String lokasibertemu = mItems.get(i).getLokasibertemu();
 //                            String actionplan = mItems.get(i).getActionplan();
 //
-//                            Datasub3_1 data = new Datasub3_1(namanasabah,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan);
+//                            Datasub3_1 data = new Datasub3_1(namaanggota,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan);
 //                            datacontacted.add(data);
 //
-//                            Toast.makeText(SubHalaman3.this, namanasabah+"/"+cif , Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SubHalaman3.this, namaanggota+"/"+cif , Toast.LENGTH_SHORT).show();
 //                        }
 //
 //                            adapter.setData(datacontacted);

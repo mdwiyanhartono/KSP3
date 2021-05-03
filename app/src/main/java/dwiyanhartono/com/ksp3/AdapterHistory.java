@@ -44,7 +44,7 @@ public class AdapterHistory extends RecyclerView.Adapter<HolderHistorycal> {
         final String bertemu = dm.getBertemu();
         final String lokasi = dm.getLokasibertemu();
         final String karakter = dm.getKarakter();
-        final String resume = dm.getResumenasabah();
+        final String resume = dm.getResumeanggota();
         final String actionplan = dm.getActionplan();
         final String cif = dm.getCif();
         final String tanggalvisit= dm.getTglvisit();
@@ -63,7 +63,7 @@ public class AdapterHistory extends RecyclerView.Adapter<HolderHistorycal> {
                 intent.putExtra("bertemu",dm.getBertemu());
                 intent.putExtra("lokasi",dm.getLokasibertemu());
                 intent.putExtra("karakter",dm.getKarakter());
-                intent.putExtra("resume",dm.getResumenasabah());
+                intent.putExtra("resume",dm.getResumeanggota());
                 intent.putExtra("actionplan",dm.getActionplan());
                 intent.putExtra("cif",dm.getCif());
                 intent.putExtra("tglvisit",dm.getTglvisit());

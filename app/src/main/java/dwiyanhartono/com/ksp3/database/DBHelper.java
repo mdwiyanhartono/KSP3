@@ -4,13 +4,14 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-
-    public DBHelper(Context context) {super(context, Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath() + "/" + Constant.DB_NAME, null, Constant.DB_VERSION);
+    public DBHelper(Context context) {
+        super(context, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath() + "/Colsys/" + Constant.DB_NAME, null, Constant.DB_VERSION);
     }
 
 
@@ -34,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL(Constant.CREATE_TB13);
             db.execSQL(Constant.CREATE_TB14);
 
-            final String Insert_Data = "INSERT INTO " + Constant.TB_NAME2 + " (type,code,'desc',status) VALUES('TMR','M039','600000','1')";
+            final String Insert_Data = "INSERT INTO " + Constant.TB_NAME2 + " (type,code,'desc',status) VALUES('TMR','M039','900000','1')";
             db.execSQL(Insert_Data);
         } catch (SQLException e) {
             e.printStackTrace();

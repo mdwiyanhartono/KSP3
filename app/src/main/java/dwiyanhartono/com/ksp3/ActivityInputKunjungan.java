@@ -87,8 +87,8 @@ public class ActivityInputKunjungan extends BaseActivity
     ImageView image_view, image_viewimage;
     Button btn_doc, btn_photo, btnbatal, btnsimpan, btncontact;
     LinearLayout ly1, ly2;
-    EditText pihakbank, editalamatrm, edtemail2, getAlamatusaha1, alamatusaha1, totalap, tanggalap, keterangan4, actionplan, tujuan, namanasabah, alamatrumah, alamatusaha, cif, tlpon, email, hasilkunjungan, tanggalptp, keterangan1, keterangan2, keterangan3,
-            bertemudengan, notif, lokasibertemu, resumenasabah, karakternasabah, dpd, bucketeom, totaltunggakan, totalbayar, perkiraan;
+    EditText edtangsuran, edtld, edtnorek, pihakbank, editalamatrm, edtemail2, getAlamatusaha1, alamatusaha1, totalap, tanggalap, keterangan4, actionplan, tujuan, namaanggota, alamatrumah, alamatusaha, cif, tlpon, email, hasilkunjungan, tanggalptp, keterangan1, keterangan2, keterangan3,
+            bertemudengan, lokasibertemu, resumeanggota, karakteranggota, dpd, bucketeom, totaltunggakan, totalbayar, perkiraan, notif;
     RadioGroup pilih1, pilih2;
     RadioButton ya, ya2, tidak, tidak2;
     LinearLayout lyptp;
@@ -162,6 +162,11 @@ public class ActivityInputKunjungan extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_kunjungan);
+
+        inputkunjungan();
+    }
+
+    private void inputkunjungan() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -195,9 +200,11 @@ public class ActivityInputKunjungan extends BaseActivity
         tanggalap = (EditText) findViewById(R.id.edttanggalap);
         alamatrumah = (EditText) findViewById(R.id.edtalamatrm);
         pihakbank = (EditText) findViewById(R.id.pihakbank);
+        edtnorek = (EditText) findViewById(R.id.edtnorek);
+        edtld = (EditText) findViewById(R.id.edtld);
         alamatusaha = (EditText) findViewById(R.id.edtalmtush);
         alamatusaha1 = (EditText) findViewById(R.id.edtalmtush1);
-        namanasabah = (EditText) findViewById(R.id.edtnama);
+        namaanggota = (EditText) findViewById(R.id.edtnama);
         email = (EditText) findViewById(R.id.edtemail);
         edtemail2 = (EditText) findViewById(R.id.edtemail2);
         cif = (EditText) findViewById(R.id.edtcif);
@@ -209,9 +216,9 @@ public class ActivityInputKunjungan extends BaseActivity
         keterangan3 = (EditText) findViewById(R.id.edtketerangan3);
         keterangan4 = (EditText) findViewById(R.id.edtketerangan4);
         actionplan = (EditText) findViewById(R.id.edtactionplan);
-        karakternasabah = (EditText) findViewById(R.id.edtkarakternasabah);
+        karakteranggota = (EditText) findViewById(R.id.edtkarakteranggota);
         notif = (EditText) findViewById(R.id.edtnotif);
-        resumenasabah = (EditText) findViewById(R.id.edtresumenasabah);
+        resumeanggota = (EditText) findViewById(R.id.edtresumeanggota);
         bertemudengan = (EditText) findViewById(R.id.edtbertemu);
         lokasibertemu = (EditText) findViewById(R.id.edtlokasibertemu);
         totaltunggakan = (EditText) findViewById(R.id.edttotaltunggakan);
@@ -220,6 +227,7 @@ public class ActivityInputKunjungan extends BaseActivity
         bucketeom = (EditText) findViewById(R.id.edtbucketeom);
         editalamatrm = (EditText) findViewById(R.id.editalamatrm);
         dpd = (EditText) findViewById(R.id.edtdpd);
+        edtangsuran = (EditText) findViewById(R.id.edtangsuran);
         totaldue = (TextView) findViewById(R.id.totaldue);
         dpd.setEnabled(false);
         bucketeom.setEnabled(false);
@@ -236,9 +244,11 @@ public class ActivityInputKunjungan extends BaseActivity
         /// GET EXTRAS
         Intent i = getIntent();
         cif.setText(i.getExtras().getString("cif"));
-        namanasabah.setText(i.getExtras().getString("nama"));
+        namaanggota.setText(i.getExtras().getString("nama"));
         alamatrumah.setText(i.getExtras().getString("alamat"));
         alamatusaha.setText(i.getExtras().getString("alamatusaha"));
+        edtnorek.setText(i.getExtras().getString("norek"));
+        edtld.setText(i.getExtras().getString("loanid"));
         //Toast.makeText(this, i.getExtras().getString("alamatusaha"), Toast.LENGTH_SHORT).show();
         email.setText(i.getExtras().getString("email"));
         bucketeom.setText(i.getExtras().getString("bucketeom"));
@@ -251,6 +261,7 @@ public class ActivityInputKunjungan extends BaseActivity
             angsuran = "0.00";
         }
         notlp.setText(i.getExtras().getString("notlp"));
+        edtangsuran.setText(angsuran);
         /////////////////////////////////////////
         btncontact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,7 +276,7 @@ public class ActivityInputKunjungan extends BaseActivity
         coderefrence = cif.getText().toString() + datecode;
 
 
-        totalbayar.addTextChangedListener(new NumberTextWatcher(totaltunggakan.getText().toString().trim(), totalbayar, "#,###,###,###,###.00", perkiraan, angsuran));
+        totalbayar.addTextChangedListener(new NumberTextWatcher(totaltunggakan.getText().toString().trim(), totalbayar, "#,###,###,###,###.00", perkiraan));
 //        Toast.makeText(ActivityInputKunjungan.this, codeimage1, Toast.LENGTH_SHORT).show();
         btnbatal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,17 +284,6 @@ public class ActivityInputKunjungan extends BaseActivity
                 finish();
             }
         });
-//        btnsimpan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (printing.equals("1") && !Bluetooth.isPrinterConnected(getApplicationContext(), ActivityInputKunjungan.this)) {
-////                    pdLoading.dismiss();
-//                    Bluetooth.connectPrinter(getApplicationContext(), ActivityInputKunjungan.this);
-//                } else {
-//                    print();
-//                }
-//            }
-//        });
 
         btnsimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,7 +296,7 @@ public class ActivityInputKunjungan extends BaseActivity
                 String hk = hasilkunjungan.getText().toString();
                 String bd = bertemudengan.getText().toString();
                 String lb = lokasibertemu.getText().toString();
-                String kn = karakternasabah.getText().toString();
+                String kn = karakteranggota.getText().toString();
                 String ap = actionplan.getText().toString();
                 if (tj.equals("Select")) {
                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
@@ -332,7 +332,7 @@ public class ActivityInputKunjungan extends BaseActivity
                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                     alta.setTitle("Error");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Bertemu Dengan Harus Di Pilih");
+                    alta.setMessage("Bertemu dengan harus dipilih");
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -347,7 +347,7 @@ public class ActivityInputKunjungan extends BaseActivity
                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                     alta.setTitle("Error");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Karakter Nasabah Harus Di Pilih");
+                    alta.setMessage("Karakter anggota harus dipilih");
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -362,7 +362,7 @@ public class ActivityInputKunjungan extends BaseActivity
                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                     alta.setTitle("Error");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Action Plan Harus Di Pilih");
+                    alta.setMessage("Action plan Harus dipilih");
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -386,7 +386,7 @@ public class ActivityInputKunjungan extends BaseActivity
                         final AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                         alta.setTitle("Pesan");
                         alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Location Tidak Di Temukan Mohon Periksa Settingan Location Di Device Anda");
+                        alta.setMessage("Location tidak ditemukan mohon periksa settingan location didevice anda");
                         alta.setCancelable(false);
                         alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                             @Override
@@ -414,7 +414,7 @@ public class ActivityInputKunjungan extends BaseActivity
                                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                                     alta.setTitle("Pesan");
                                     alta.setIcon(R.drawable.warning);
-                                    alta.setMessage("Date Action Plan Belum Di Isi !");
+                                    alta.setMessage("Date action plan belum diisi!");
                                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -430,7 +430,7 @@ public class ActivityInputKunjungan extends BaseActivity
                                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                                     alta.setTitle("Pesan");
                                     alta.setIcon(R.drawable.warning);
-                                    alta.setMessage("Total Bayar Belum Di Isi, Apakah Tetap Ingin Mengirim ?");
+                                    alta.setMessage("Total bayar belum diisi, apakah tetap ingin mengirim ?");
                                     alta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -450,6 +450,7 @@ public class ActivityInputKunjungan extends BaseActivity
                                     db.close();
                                 } else {
                                     if (edtemail2.getText().toString().isEmpty()) {
+                                        pdLoading.show();
                                         cekimage(codeimage1, lat, lng);
                                     } else {
                                         if (edtemail2.getText().toString().trim().matches(emailPattern)) {
@@ -480,49 +481,56 @@ public class ActivityInputKunjungan extends BaseActivity
 
                             DBAdapter2 db22 = new DBAdapter2(ActivityInputKunjungan.this);
                             db22.openDB();
-                            Cursor img3 = db22.getimage3(cif.getText().toString(), codeimage1, "0", "photo_jaminan");
-                            if (img3.getCount() > 0) {
-                                long result = db22.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namanasabah.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString());
-                                db22.deleteaccountpercif(cif.getText().toString());
-                                db22.deletetunggakan(cif.getText().toString());
-                                if (result > 0) {
-                                    pdLoading.dismiss();
-
-                                    AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                                    alta.setTitle("Pesan");
-                                    alta.setIcon(R.drawable.warning);
-                                    alta.setMessage("Tidak ada Connection Internet, Data Gagal Terkirim, Dan Di Simpan Di Local Storage !!!");
-                                    alta.setCancelable(false);
-                                    alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            finish();
-                                        }
-                                    });
-                                    alta.create();
-                                    alta.show();
-                                }
-
-                                db22.close();
-                            } else {
+//                            Cursor img3 = db22.getimage3(cif.getText().toString(), codeimage1, "0", "photo_jaminan");
+//                            if (img3.getCount() > 0) {
+                            long result = db22.addkunjungan(id_user,
+                                    cif.getText().toString(),
+                                    codeimage1,
+                                    tujuan.getText().toString(),
+                                    hasilkunjungan.getText().toString(),
+                                    keterangan1.getText().toString(),
+                                    namaanggota.getText().toString(),
+                                    actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakteranggota.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumeanggota.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString(), edtnorek.getText().toString(), edtangsuran.getText().toString(), edtld.getText().toString());
+                            db22.deleteaccountpercif(cif.getText().toString());
+                            db22.deletetunggakan(cif.getText().toString());
+                            if (result > 0) {
                                 pdLoading.dismiss();
+
                                 AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                                 alta.setTitle("Pesan");
                                 alta.setIcon(R.drawable.warning);
-                                alta.setMessage("Data Gagal Terkirim, Silahkan Ambil Foto Photo Jaminan !");
+                                alta.setMessage("Tidak ada connection internet, data gagal terkirim, dan disimpan di local storage!");
                                 alta.setCancelable(false);
                                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        pdLoading.dismiss();
                                         dialog.dismiss();
+                                        finish();
                                     }
                                 });
-
                                 alta.create();
                                 alta.show();
                             }
+
+                            db22.close();
+//                            } else {
+//                                pdLoading.dismiss();
+//                                AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+//                                alta.setTitle("Pesan");
+//                                alta.setIcon(R.drawable.warning);
+//                                alta.setMessage("Data gagal terkirim, silahkan ambil foto jaminan!");
+//                                alta.setCancelable(false);
+//                                alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        pdLoading.dismiss();
+//                                        dialog.dismiss();
+//                                    }
+//                                });
+//
+//                                alta.create();
+//                                alta.show();
+//                            }
                         }
 
                     }
@@ -601,10 +609,9 @@ public class ActivityInputKunjungan extends BaseActivity
         listbertemu();
         listhasilkunjungan();
         listlokasibertemu();
-        listkarakternasabah();
+        listkarakteranggota();
         listNotif();
         viewcontact();
-
 
     }
 
@@ -634,10 +641,9 @@ public class ActivityInputKunjungan extends BaseActivity
             String datetime = new SimpleDateFormat("dd-MM-yyyy-HH:mm:ss", Locale.getDefault()).format(new Date());
 
 
-
-            BILL = BILL + String.format("%1$-15s %2$1s %3$1s ", "Nama", ":", namanasabah.getText().toString());
-            BILL2 = BILL2 + String.format("%1$-15s %2$1s %3$1s ", "Cif", ":", cif.getText().toString());
-            BILL6 = BILL6 + String.format("%1$-15s %2$1s %3$1s ", "No Refrence", ":", codeimage1);
+            BILL = BILL + String.format("%1$-10s %2$1s %3$1s ", "Nama", ":", namaanggota.getText().toString());
+            BILL2 = BILL2 + String.format("%1$-10s %2$1s %3$1s ", "Cif", ":", cif.getText().toString());
+            BILL6 = BILL6 + String.format("%1$-10s %2$1s %3$1s ", "No Refrence", ":", codeimage1);
             BILL9 = BILL9 + String.format("%1$-15s %2$1s %3$1s ", "Total", ":", totaltunggakan.getText().toString());
             BILL13 = BILL13 + String.format("%1$-5s %2$5s %3$1s ", "", "Tagihan", "");
             BILL14 = BILL14 + String.format("%1$-31s %2$1s %3$1s ", "Nominal Yang Di\nSetor", ":", totalbayar.getText().toString());
@@ -722,27 +728,307 @@ public class ActivityInputKunjungan extends BaseActivity
 
     }
 
-    private void cekimage(final String codeimage1, final String lat, final String lng) {
-        DBAdapter2 db = new DBAdapter2(this);
+    private void sencontact(final String codeimage1, final String lat, final String lng) {
+
+        DBAdapter2 db = new DBAdapter2(ActivityInputKunjungan.this);
+        //OPEN
         db.openDB();
-        Cursor img3 = db.getimage3(cif.getText().toString(), codeimage1, "0", "photo_jaminan");
-        if (img3.getCount() > 0) {
+        Cursor cntc = db.getcontactall(cif.getText().toString(), "0");
+        if (cntc.getCount() > 0) {
+            if (cntc.moveToFirst()) {
+
+                totalContact = cntc.getCount();
+                totalUploadedContact = 0;
+
+                do {
+                    final String cif = cntc.getString(1);
+                    String Contact1 = cntc.getString(2);
+                    String Contact2 = cntc.getString(3);
+                    String Contact3 = cntc.getString(4);
+                    String Contact4 = cntc.getString(5);
+                    String Contact5 = cntc.getString(6);
+                    String Contact6 = cntc.getString(7);
+                    String Contact7 = cntc.getString(8);
+
+                    ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
+                    Call<ResponsModelcontactupdate> getdata = api.Updatecontact(new Requestupcontact(cif, Contact1, Contact2, Contact3, Contact4, Contact5, Contact6, Contact7));
+                    getdata.enqueue(new Callback<ResponsModelcontactupdate>() {
+                        @Override
+                        public void onResponse(Call<ResponsModelcontactupdate> call, Response<ResponsModelcontactupdate> response) {
+                            String kode = response.body() != null ? response.body().getKode() : "9";
+                            if (kode.equals("1")) {
+                                DBAdapter2 db1 = new DBAdapter2(ActivityInputKunjungan.this);
+                                db1.openDB();
+                                db1.updatestscontact(cif, "1");
+                                db1.close();
+
+                                totalUploadedContact++;
+                                if (totalContact == totalUploadedContact) {
+                                    sendimage(codeimage1, lat, lng);
+//                                    sendata(codeimage1, lat, lng);
+                                }
+
+                            } else if (kode.equals("9")) {
+//                                Toast.makeText(ActivityInputKunjungan.this, "Terjadi masalah silahkan hubungi admin \n error code : SNDCNCT01", Toast.LENGTH_LONG).show();
+                            } else {
+                                totalUploadedContact++;
+                                if (totalContact == totalUploadedContact) {
+//                                    sendata(codeimage1, lat, lng);
+                                    sendimage(codeimage1, lat, lng);
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponsModelcontactupdate> call, Throwable t) {
+                            totalUploadedContact++;
+//                            sendata(codeimage1, lat, lng);
+//                            pdLoading.dismiss();
+                            if (totalContact == totalUploadedContact) {
+//                                sendata(codeimage1, lat, lng);
+                                sendimage(codeimage1, lat, lng);
+                            }
+                        }
+                    });
+
+
+                } while (cntc.moveToNext());
+
+
+            } else {
+//                sendata(codeimage1, lat, lng);
+                sendimage(codeimage1, lat, lng);
+            }
+
+        } else {
             sendimage(codeimage1, lat, lng);
+//            sendata(codeimage1, lat, lng);
+        }
+        db.close();
+    }
+
+    private void sendata(final String codeimage1, final String lat, final String lng) {
+        DBAdapter2 db33 = new DBAdapter2(ActivityInputKunjungan.this);
+        db33.openDB();
+        long result = db33.addkunjungan(id_user,
+                cif.getText().toString(),
+                codeimage1,
+                tujuan.getText().toString(),
+                hasilkunjungan.getText().toString(),
+                keterangan1.getText().toString(),
+                namaanggota.getText().toString(),
+                actionplan.getText().toString(),
+                bertemudengan.getText().toString(),
+                keterangan2.getText().toString(),
+                lokasibertemu.getText().toString(),
+                keterangan3.getText().toString(),
+                karakteranggota.getText().toString(),
+                negatifissue,
+                actionplan.getText().toString(),
+                tanggalap.getText().toString(),
+                resumeanggota.getText().toString(),
+                totaltunggakan.getText().toString(),
+                totalbayar.getText().toString(),
+                perkiraan.getText().toString(),
+                datevisit, lat, lng, "0",
+                edtemail2.getText().toString(),
+                editalamatrm.getText().toString(),
+                alamatusaha1.getText().toString(),
+                pihakbank.getText().toString(),
+                keterangan4.getText().toString(),
+                notif.getText().toString(),
+                edtnorek.getText().toString(),
+                edtangsuran.getText().toString(), edtld.getText().toString());
+        if (result > 0) {
+            final String codeimage = cif.getText().toString() + datevisit;
+            ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
+            Call<ResponsModelChangePswd> getdata = api.insertkunjungan2(new RequestKunjungan(
+                    codeimage1,
+                    lat,
+                    lng,
+                    id_user,
+                    tujuan.getText().toString(),
+                    namaanggota.getText().toString(),
+                    cif.getText().toString(),
+                    edtld.getText().toString(),
+                    hasilkunjungan.getText().toString(),
+                    keterangan1.getText().toString(),
+                    "hiden",
+                    bertemudengan.getText().toString(),
+                    keterangan2.getText().toString(),
+                    lokasibertemu.getText().toString(),
+                    keterangan3.getText().toString(),
+                    karakteranggota.getText().toString(),
+                    keterangan4.getText().toString(),
+                    negatifissue,
+                    actionplan.getText().toString(),
+                    "dsbfds",
+                    tanggalap.getText().toString(),
+                    resumeanggota.getText().toString(),
+                    totaltunggakan.getText().toString(),
+                    perkiraan.getText().toString(),
+                    datevisit,
+                    totalbayar.getText().toString(),
+                    edtemail2.getText().toString(),
+                    editalamatrm.getText().toString(),
+                    alamatusaha1.getText().toString(),
+                    pihakbank.getText().toString(),
+                    notif.getText().toString(),
+                    edtangsuran.getText().toString(),
+                    edtnorek.getText().toString()
+            ));
+            getdata.enqueue(new Callback<ResponsModelChangePswd>() {
+                @Override
+                public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
+                    Log.d("data1", String.valueOf(response.body()));
+                    String kode = response.body().getKode();
+                    if (kode.equals("1")) {
+                        pdLoading.dismiss();
+                        DBAdapter2 db3 = new DBAdapter2(ActivityInputKunjungan.this);
+                        db3.openDB();
+
+                        Long result = db3.updatelistpendingsenddata(codeimage1);
+                        String ld = edtld.getText().toString();
+
+                        if (result > 0) {
+//                        db3.deleteaccount(cif2);
+                            db3.deleteaccountpercif(ld);
+                            db3.deletetunggakan(ld);
+                        }
+                        db3.close();
+                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+                        alta.setTitle("Pesan");
+                        alta.setIcon(R.drawable.checklist);
+                        alta.setMessage("Data berhasil diKirim ke server");
+                        alta.setCancelable(false);
+                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ActivityInputKunjungan.this, ActivityDailyPlanVisit.class);
+                                startActivity(intent);
+                                finish();
+                                if (printing.equals("1")) {
+                                    print();
+                                }
+//                                sendimage(codeimage1, lat, lng);
+                            }
+                        });
+
+                        alta.create();
+                        alta.show();
+
+                    } else {
+
+                        pdLoading.dismiss();
+                        DBAdapter2 db4 = new DBAdapter2(ActivityInputKunjungan.this);
+                        db4.openDB();
+                        String cif2 = cif.getText().toString();
+                        db4.deleteaccountpercif(cif2);
+                        db4.deletetunggakan(cif2);
+                        db4.close();
+                        String message = response.body().getMessage();
+                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+                        alta.setTitle("Pesan");
+                        alta.setIcon(R.drawable.warning);
+                        alta.setMessage(message);
+                        alta.setCancelable(false);
+                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+//                                if (printing.equals("1")) {
+//                                    print();
+//                                }
+//                                finish();
+//                                Intent intent = new Intent(ActivityInputKunjungan.this, ActivityDailyPlanVisit.class);
+//                                startActivity(intent);
+                            }
+                        });
+
+                        alta.create();
+                        alta.show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
+
+                    DBAdapter2 db3 = new DBAdapter2(ActivityInputKunjungan.this);
+                    db3.openDB();
+                    db3.deleteaccountpercif(edtld.getText().toString());
+                    db3.deletetunggakan(edtld.getText().toString());
+                    AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+                    alta.setTitle("Pesan");
+                    alta.setIcon(R.drawable.warning);
+                    alta.setMessage("Data gagal terkirim, &  Di Simpan Di Local Storage, Menunggu Sampai Internet Tersedia !!! \n error code : IPT01 \n message : " + t.getMessage());
+                    alta.setCancelable(false);
+                    alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            if (printing.equals("1")) {
+                                print();
+                            }
+                            finish();
+                        }
+                    });
+
+                    alta.create();
+                    alta.show();
+                    db3.close();
+
+                }
+            });
         } else {
             pdLoading.dismiss();
             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
             alta.setTitle("Pesan");
             alta.setIcon(R.drawable.warning);
-            alta.setMessage("Data Gagal Terkirim, Silahkan Ambil Foto Photo Jaminan !");
+            alta.setMessage("Local Storage Bermasalah");
             alta.setCancelable(false);
             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            alta.create();
+            alta.show();
+        }
+        db33.close();
+    }
+
+    private void cekimage(final String codeimage1, final String lat, final String lng) {
+        DBAdapter2 db = new DBAdapter2(this);
+        db.openDB();
+        Cursor img3 = db.getimage3(cif.getText().toString(), codeimage1, "0", "photo_jaminan");
+        if (img3.getCount() > 0) {
+            sencontact(codeimage1, lat, lng);
+//            sendimage(codeimage1, lat, lng);
+        } else {
+            pdLoading.dismiss();
+            AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+            alta.setTitle("Pesan");
+            alta.setIcon(R.drawable.warning);
+            alta.setMessage("Anda belum mengambil foto jaminan, apakah ingin tetap mengirim ?");
+            alta.setCancelable(false);
+            alta.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     pdLoading.dismiss();
                     dialog.dismiss();
                 }
             });
-
+            alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    pdLoading.show();
+                    sencontact(codeimage1, lat, lng);
+                }
+            });
             alta.create();
             alta.show();
         }
@@ -805,15 +1091,33 @@ public class ActivityInputKunjungan extends BaseActivity
 
                                     totalUploadedImage++;
                                     if (totalImage == totalUploadedImage) {
-                                        sencontact(codeimage1, lat, lng);
-//                                    sendata(codeimage1, lat, lng);
+//                                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
+//                                        alta.setTitle("Pesan");
+//                                        alta.setIcon(R.drawable.checklist);
+//                                        alta.setMessage("Image Berhasil Di Kirim Ke Server");
+//                                        alta.setCancelable(false);
+//                                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int which) {
+//                                                Intent intent = new Intent(ActivityInputKunjungan.this, ActivityDailyPlanVisit.class);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                        });
+//
+//                                        alta.create();
+//                                        alta.show();
+//                                        sencontact(codeimage1, lat, lng);
+                                        sendata(codeimage1, lat, lng);
+                                    } else {
+                                        sendata(codeimage1, lat, lng);
                                     }
                                 } else {
                                     pdLoading.dismiss();
                                     AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                                     alta.setTitle("Pesan");
                                     alta.setIcon(R.drawable.warning);
-                                    alta.setMessage("Data Gagal Terkirim !");
+                                    alta.setMessage("Data gagal terkirim \n Mungkin terjadi suatu hal pada server dan segera melapor");
                                     alta.setCancelable(false);
                                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                         @Override
@@ -836,19 +1140,18 @@ public class ActivityInputKunjungan extends BaseActivity
 //                                if (totalImage == totalUploadedImage) {
                                 DBAdapter2 db3 = new DBAdapter2(ActivityInputKunjungan.this);
                                 db3.openDB();
-                                long result = db3.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namanasabah.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString());
-
+                                long result = db3.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namaanggota.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakteranggota.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumeanggota.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString(), edtnorek.getText().toString(), edtangsuran.getText().toString(), edtld.getText().toString());
                                 if (result > 0) {
                                     db3.deleteaccountpercif(cif.getText().toString());
                                     db3.deletetunggakan(cif.getText().toString());
 
                                 }
-//                                    db3.close();
+                                db3.close();
                                 pdLoading.dismiss();
                                 AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                                 alta.setTitle("Pesan");
                                 alta.setIcon(R.drawable.warning);
-                                alta.setMessage("Data Gagal Terkirim ," + t.getMessage() + " dan tersimpan di Local Storage !");
+                                alta.setMessage("Data Image gagal terkirim ," + t.getMessage() + " dan tersimpan di Local Storage ! \n mungkin ada hal tidak normal segera melapor ke admin");
                                 alta.setCancelable(false);
                                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                     @Override
@@ -874,48 +1177,17 @@ public class ActivityInputKunjungan extends BaseActivity
 
 
                 } else {
-                    pdLoading.dismiss();
-                    AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                    alta.setTitle("Pesan");
-                    alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Belum Mengambil Foto, Silahkan ambil Foto terlebih dahulu !");
-                    alta.setCancelable(false);
-                    alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            pdLoading.dismiss();
-                            dialog.dismiss();
-                        }
-                    });
-
-                    alta.create();
-                    alta.show();
+                    sendata(codeimage1, lat, lng);
 
                 }
             }
         } else {
-            pdLoading.dismiss();
-            AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-            alta.setTitle("Pesan");
-            alta.setIcon(R.drawable.warning);
-            alta.setMessage("Data Gagal Terkirim, Silahkan Ambil Foto Photo Jaminan !");
-            alta.setCancelable(false);
-            alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    pdLoading.dismiss();
-                    dialog.dismiss();
-                }
-            });
-
-            alta.create();
-            alta.show();
+            sendata(codeimage1, lat, lng);
         }
-
     }
 
     public void deleteImage(String filename) {
-        File fdelete = new File(Environment.getExternalStoragePublicDirectory("iColls").getAbsolutePath(), "AppsPhoto" + "/" + filename);
+        File fdelete = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys").getAbsolutePath(), "AppsPhoto" + "/" + filename);
         if (fdelete.exists()) {
             if (fdelete.delete()) {
                 Log.e("-->", "file Deleted :");
@@ -925,225 +1197,8 @@ public class ActivityInputKunjungan extends BaseActivity
         }
     }
 
-    private void sencontact(final String codeimage1, final String lat, final String lng) {
-
-        DBAdapter2 db = new DBAdapter2(ActivityInputKunjungan.this);
-        //OPEN
-        db.openDB();
-        Cursor cntc = db.getcontactall(cif.getText().toString(), "0");
-        if (cntc.getCount() > 0) {
-            if (cntc.moveToFirst()) {
-
-                totalContact = cntc.getCount();
-                totalUploadedContact = 0;
-
-                do {
-                    final String cif = cntc.getString(1);
-                    String Contact1 = cntc.getString(2);
-                    String Contact2 = cntc.getString(3);
-                    String Contact3 = cntc.getString(4);
-                    String Contact4 = cntc.getString(5);
-                    String Contact5 = cntc.getString(6);
-                    String Contact6 = cntc.getString(7);
-                    String Contact7 = cntc.getString(8);
-
-                    ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-                    Call<ResponsModelcontactupdate> getdata = api.Updatecontact(new Requestupcontact(cif, Contact1, Contact2, Contact3, Contact4, Contact5, Contact6, Contact7));
-                    getdata.enqueue(new Callback<ResponsModelcontactupdate>() {
-                        @Override
-                        public void onResponse(Call<ResponsModelcontactupdate> call, Response<ResponsModelcontactupdate> response) {
-                            String kode = response.body() != null ? response.body().getKode() : "9";
-                            if (kode.equals("1")) {
-                                DBAdapter2 db1 = new DBAdapter2(ActivityInputKunjungan.this);
-                                db1.openDB();
-                                db1.updatestscontact(cif, "1");
-                                db1.close();
-
-                                totalUploadedContact++;
-                                if (totalContact == totalUploadedContact) {
-                                    sendata(codeimage1, lat, lng);
-                                }
-
-                            } else if (kode.equals("9")) {
-//                                Toast.makeText(ActivityInputKunjungan.this, "Terjadi masalah silahkan hubungi admin \n error code : SNDCNCT01", Toast.LENGTH_LONG).show();
-                            } else {
-                                totalUploadedContact++;
-                                if (totalContact == totalUploadedContact) {
-                                    sendata(codeimage1, lat, lng);
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponsModelcontactupdate> call, Throwable t) {
-                            totalUploadedContact++;
-//                            sendata(codeimage1, lat, lng);
-//                            pdLoading.dismiss();
-                            if (totalContact == totalUploadedContact) {
-                                sendata(codeimage1, lat, lng);
-                            }
-                        }
-                    });
-
-
-                } while (cntc.moveToNext());
-
-
-            } else {
-                sendata(codeimage1, lat, lng);
-            }
-
-        } else {
-            sendata(codeimage1, lat, lng);
-        }
-        db.close();
-    }
-
-    private void sendata(final String codeimage1, final String lat, final String lng) {
-        DBAdapter2 db33 = new DBAdapter2(ActivityInputKunjungan.this);
-        db33.openDB();
-        long result = db33.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namanasabah.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString());
-        if (result > 0) {
-            final String codeimage = cif.getText().toString() + datevisit;
-            ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-            Call<ResponsModelChangePswd> getdata = api.insertkunjungan2(new RequestKunjungan(codeimage1, lat, lng, id_user, tujuan.getText().toString(), namanasabah.getText().toString(), cif.getText().toString(), loan, hasilkunjungan.getText().toString(), keterangan1.getText().toString(), "hiden", bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), keterangan4.getText().toString(), negatifissue, actionplan.getText().toString(), "", tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), perkiraan.getText().toString(), datevisit, totalbayar.getText().toString(), edtemail2.getText().toString(), alamatusaha1.getText().toString(), editalamatrm.getText().toString(), pihakbank.getText().toString(), notif.getText().toString()));
-            getdata.enqueue(new Callback<ResponsModelChangePswd>() {
-                @Override
-                public void onResponse(Call<ResponsModelChangePswd> call, Response<ResponsModelChangePswd> response) {
-                    String kode = response.body().getKode();
-                    if (kode.equals("1")) {
-                        pdLoading.dismiss();
-                        DBAdapter2 db3 = new DBAdapter2(ActivityInputKunjungan.this);
-                        db3.openDB();
-
-                        Long result = db3.updatelistpendingsenddata(codeimage1);
-                        String cif2 = cif.getText().toString();
-
-                        if (result > 0) {
-//                        db3.deleteaccount(cif2);
-                            db3.deleteaccountpercif(cif2);
-                            db3.deletetunggakan(cif2);
-                        }
-                        db3.close();
-                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                        alta.setTitle("Pesan");
-                        alta.setIcon(R.drawable.checklist);
-                        alta.setMessage("Data Berhasil Di Kirim Ke Server");
-                        alta.setCancelable(false);
-                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (printing.equals("1")) {
-                                    print();
-                                }
-                                finish();
-                                Intent intent = new Intent(ActivityInputKunjungan.this, ActivityDailyPlanVisit.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                        alta.create();
-                        alta.show();
-
-                    } else {
-
-                        pdLoading.dismiss();
-                        DBAdapter2 db4 = new DBAdapter2(ActivityInputKunjungan.this);
-                        db4.openDB();
-                        Long result = db4.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namanasabah.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString());
-                        String cif2 = cif.getText().toString();
-                        if (result > 0) {
-//                        db4.deleteaccount(cif2);
-                            db4.deleteaccountpercif(cif2);
-                            db4.deletetunggakan(cif2);
-                        }
-                        db4.close();
-                        String message = response.body().getMessage();
-                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                        alta.setTitle("Pesan");
-                        alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Data gagal di kirim, dan di simpan di local storage ! \n error code : IPT01 \n message : " + message);
-                        alta.setCancelable(false);
-                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                if (printing.equals("1")) {
-                                    print();
-                                }
-                                finish();
-                                Intent intent = new Intent(ActivityInputKunjungan.this, ActivityDailyPlanVisit.class);
-                                startActivity(intent);
-                            }
-                        });
-
-                        alta.create();
-                        alta.show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponsModelChangePswd> call, Throwable t) {
-
-                    DBAdapter2 db3 = new DBAdapter2(ActivityInputKunjungan.this);
-                    db3.openDB();
-                    long result = db3.addkunjungan(id_user, cif.getText().toString(), codeimage1, tujuan.getText().toString(), hasilkunjungan.getText().toString(), keterangan1.getText().toString(), namanasabah.getText().toString(), actionplan.getText().toString(), bertemudengan.getText().toString(), keterangan2.getText().toString(), lokasibertemu.getText().toString(), keterangan3.getText().toString(), karakternasabah.getText().toString(), negatifissue, actionplan.getText().toString(), tanggalap.getText().toString(), resumenasabah.getText().toString(), totaltunggakan.getText().toString(), totalbayar.getText().toString(), perkiraan.getText().toString(), datevisit, lat, lng, "0", edtemail2.getText().toString(), editalamatrm.getText().toString(), alamatusaha1.getText().toString(), pihakbank.getText().toString(), keterangan4.getText().toString(), notif.getText().toString());
-//                db3.deleteaccount(cif.getText().toString());
-                    db3.deleteaccountpercif(cif.getText().toString());
-                    db3.deletetunggakan(cif.getText().toString());
-
-                    if (result > 0) {
-                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                        alta.setTitle("Pesan");
-                        alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Data Gagal Terkirim, &  Di Simpan Di Local Storage, Menunggu Sampai Internet Tersedia !!! \n error code : IPT01 \n message : " + t.getMessage());
-                        alta.setCancelable(false);
-                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                if (printing.equals("1")) {
-                                    print();
-                                }
-                                finish();
-                            }
-                        });
-
-                        alta.create();
-                        alta.show();
-                    } else {
-                        AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
-                        alta.setTitle("Pesan");
-                        alta.setIcon(R.drawable.warning);
-                        alta.setMessage("Data gagal terkirim dan gagal di simpan di local storage !!!");
-                        alta.setCancelable(false);
-                        alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                if (printing.equals("1")) {
-                                    print();
-                                }
-                                finish();
-                            }
-                        });
-
-                        alta.create();
-                        alta.show();
-                    }
-                    db3.close();
-
-                }
-            });
-        }
-        db33.close();
-    }
-
 
     private void retrievetunggakan() {
-
         tunggakan.clear();
         DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
@@ -1270,8 +1325,6 @@ public class ActivityInputKunjungan extends BaseActivity
         }
         spinner1.setAdapter(adapter1);
         db.close();
-
-
     }
 
     private void listhasilkunjungan() {
@@ -1349,57 +1402,11 @@ public class ActivityInputKunjungan extends BaseActivity
         db.close();
     }
 
-    private void listkarakternasabah() {
+    private void listkarakteranggota() {
         final DBAdapter2 db = new DBAdapter2(this);
         db.openDB();
         final Cursor bn = db.getlistap("16", "1");
         conn = new Conectiondetector(ActivityInputKunjungan.this);
-        /*if (conn.isConected()) {
-            ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-            Call<ResponsModelAP> getdata = api.viewAP(new RequestActionplan("KN"));
-            getdata.enqueue(new Callback<ResponsModelAP>() {
-                @Override
-                public void onResponse(Call<ResponsModelAP> call, Response<ResponsModelAP> response) {
-                    String kode = response.body().getKode();
-                    //Toast.makeText(ActivityInputKunjungan.this, "data ada"+kode, Toast.LENGTH_SHORT).show();
-                    if (kode.equals("1")) {
-                        //Toast.makeText(ActivityInputKunjungan.this, "data ada", Toast.LENGTH_SHORT).show();
-                        list = response.body().getResult();
-                        IstSource5.add("Select");
-                        for (int i = 0; i < list.size(); i++) {
-                            IstSource5.add(list.get(i).getDesc());
-                            adapter5 = new SpinnerAdapter5(IstSource5, ActivityInputKunjungan.this);
-                        }
-                        spinner5.setAdapter(adapter5);
-                    } else {
-                        if (bn.moveToFirst()) {
-                            IstSource5.add("Select");
-                            do {
-                                IstSource5.add(bn.getString(0));
-                                //Toast.makeText(ActivityInputKunjungan.this, ap.getString(0), Toast.LENGTH_SHORT).show();
-                                adapter5 = new SpinnerAdapter5(IstSource5, ActivityInputKunjungan.this);
-                            }
-                            while (bn.moveToNext());
-                            spinner5.setAdapter(adapter5);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponsModelAP> call, Throwable t) {
-                    if (bn.moveToFirst()) {
-                        IstSource5.add("Select");
-                        do {
-                            IstSource5.add(bn.getString(0));
-                            //Toast.makeText(ActivityInputKunjungan.this, ap.getString(0), Toast.LENGTH_SHORT).show();
-                            adapter5 = new SpinnerAdapter5(IstSource5, ActivityInputKunjungan.this);
-                        }
-                        while (bn.moveToNext());
-                        spinner5.setAdapter(adapter5);
-                    }
-                }
-            });
-        } else {*/
         if (bn.getCount() > 0) {
             if (bn.moveToFirst()) {
                 IstSource5.add("Select");
@@ -1693,7 +1700,7 @@ public class ActivityInputKunjungan extends BaseActivity
                             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                             alta.setTitle("Pesan2");
                             alta.setIcon(R.drawable.checklist);
-                            alta.setMessage("Data Gagal Di Simpan");
+                            alta.setMessage("Data gagal Di Simpan");
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
@@ -1732,7 +1739,7 @@ public class ActivityInputKunjungan extends BaseActivity
                             AlertDialog.Builder alta = new AlertDialog.Builder(ActivityInputKunjungan.this);
                             alta.setTitle("Pesan4");
                             alta.setIcon(R.drawable.checklist);
-                            alta.setMessage("Data Gagal Di Simpan");
+                            alta.setMessage("Data gagal Di Simpan");
                             alta.setCancelable(false);
                             alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                                 @Override
@@ -1984,7 +1991,7 @@ public class ActivityInputKunjungan extends BaseActivity
     public File getimage(String filename) {
 //        File file = new File(filename);
 
-        return new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto/" + filename);
+        return new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys/").getAbsolutePath(), "AppsPhoto/" + filename);
     }
 
     @Override
@@ -2015,6 +2022,7 @@ public class ActivityInputKunjungan extends BaseActivity
         spinner4 = (Spinner) parent;
         spinner5 = (Spinner) parent;
         spinner6 = (Spinner) parent;
+        spinner7 = (Spinner) parent;
 
         if (spinner1.getId() == R.id.spinner1) {
             tujuan.setText(IstSource1.get(position));
@@ -2044,7 +2052,7 @@ public class ActivityInputKunjungan extends BaseActivity
             // Toast.makeText(this, IstSource4.get(position), Toast.LENGTH_SHORT).show();
         }
         if (spinner5.getId() == R.id.spinner5) {
-            karakternasabah.setText(IstSource5.get(position));
+            karakteranggota.setText(IstSource5.get(position));
             //Toast.makeText(this, IstSource5.get(position), Toast.LENGTH_SHORT).show();
         }
         if (spinner7.getId() == R.id.spinner7) {

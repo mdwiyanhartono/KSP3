@@ -16,7 +16,7 @@ public class Dataallkunjungan {
     @SerializedName("f_tujuan")
     private String tujuan;
     @SerializedName("f_nama_nasbah")
-    private String namanasabah;
+    private String namaanggota;
 
 
 }

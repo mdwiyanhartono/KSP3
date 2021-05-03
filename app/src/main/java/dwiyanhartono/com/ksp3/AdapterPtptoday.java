@@ -32,7 +32,7 @@ public class AdapterPtptoday extends RecyclerView.Adapter<HolderPTP> {
     @Override
     public void onBindViewHolder(final HolderPTP holder, final int position) {
         final Dataptp dm = assignment.get(position);
-        holder.namanasabah.setText(dm.getNamanasabah());
+        holder.namaanggota.setText(dm.getNamaanggota());
         holder.cif.setText(dm.getCif());
         holder.loan.setText(dm.getLoanid());
         holder.bertemu.setText(dm.getBertemu());

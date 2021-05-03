@@ -36,6 +36,7 @@
                 android:background="@drawable/rounded_background_strokred"
                 android:hint="@string/search"
                 android:textSize="15sp"
+                android:focusable="false"
                 android:inputType="text" />
             <ImageView
                 android:id="@+id/cari"

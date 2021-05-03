@@ -29,8 +29,8 @@ public class DataHistorical {
     private String lokasibertemu;
     @SerializedName("f_karakter")
     private String karakter;
-    @SerializedName("f_resumenasabah")
-    private String resumenasabah;
+    @SerializedName("f_resumeanggota")
+    private String resumeanggota;
     @SerializedName("f_actionplan")
     private String actionplan;
     @SerializedName("f_tgl_visit")
@@ -137,12 +137,12 @@ public class DataHistorical {
         this.karakter = karakter;
     }
 
-    public String getResumenasabah() {
-        return resumenasabah;
+    public String getResumeanggota() {
+        return resumeanggota;
     }
 
-    public void setResumenasabah(String resumenasabah) {
-        this.resumenasabah = resumenasabah;
+    public void setResumeanggota(String resumeanggota) {
+        this.resumeanggota = resumeanggota;
     }
 
     public String getActionplan() {

@@ -121,7 +121,7 @@ public class DBAdapter {
         return 0;
     }
 
-    public long addlocnasabah(String branch, String cif, String acctno, String long1, String lat) {
+    public long addlocanggota(String branch, String cif, String acctno, String long1, String lat) {
         try {
             ContentValues cv = new ContentValues();
             cv.put(Constants.ROW_BRANCH, branch);
@@ -162,7 +162,7 @@ public class DBAdapter {
     }
 
     public long add2(String name, String loan, String cycle, String os, String totalkewajiban, String alamat
-            , String nasabahbayar, String bertemu, String nominal_bayar, String lokasibertemmu, String karakternasabah, String resume, String buktibayar, String photo, String tglasign, String tglproses, String status, Integer statussattlement) {
+            , String anggotabayar, String bertemu, String nominal_bayar, String lokasibertemmu, String karakteranggota, String resume, String buktibayar, String photo, String tglasign, String tglproses, String status, Integer statussattlement) {
         try {
             ContentValues cv = new ContentValues();
             cv.put(Constants.NAME2, name);
@@ -171,12 +171,12 @@ public class DBAdapter {
             cv.put(Constants.Os2, os);
             cv.put(Constants.Total_Kewajiban2, totalkewajiban);
             cv.put(Constants.Alamat2, alamat);
-            cv.put(Constants.NASABAH_BAYAR, nasabahbayar);/*
+            cv.put(Constants.anggota_BAYAR, anggotabayar);/*
             cv.put(Constants.FULLPART,fullpart );*/
             cv.put(Constants.BERTEMU, bertemu);
             cv.put(Constants.NOMINAL_BAYAR, nominal_bayar);
             cv.put(Constants.LOKASIBERTEMU, lokasibertemmu);
-            cv.put(Constants.KARAKTERNASABAH, karakternasabah);
+            cv.put(Constants.KARAKTERanggota, karakteranggota);
             cv.put(Constants.RESUME, resume);
             cv.put(Constants.BUKTIBAYAR, buktibayar);
             cv.put(Constants.IMAGE, photo);
@@ -223,7 +223,7 @@ public class DBAdapter {
             cv.put(Constants.AlamatIVH, alamat);
             cv.put(Constants.BERTEMUDGN, bertemu);
             cv.put(Constants.KEBERADAAN_ASET, aset);
-            cv.put(Constants.PKERJAAN_NASABAH, krjaannasbah);
+            cv.put(Constants.PKERJAAN_anggota, krjaannasbah);
             cv.put(Constants.TANGGALGAJIAN, tglgajian);
             cv.put(Constants.POSISI_JENISUSAHA, posisi);
             cv.put(Constants.KONDISIJAMINAN, kondisijaminan);
@@ -287,7 +287,7 @@ public class DBAdapter {
 
     public long adddatahasilkunjungan(String tujuan, String nama, String cif, String hasilkunjungan, String ketkunjungan, String tanggalptp, String bertemu, String ketbertemu,
                                       String lokasibertemu, String ketlokasi, String karakter, String ketkarakter, String negatifissue,
-                                      String actionplan, String resumenasabah, String totaltunggakan, String totalbayar, String perkiraan, String tanggalvisit,
+                                      String actionplan, String resumeanggota, String totaltunggakan, String totalbayar, String perkiraan, String tanggalvisit,
                                       String photodoc, String photojaminan, String STATUS) {
         try {
             ContentValues cv = new ContentValues();
@@ -305,7 +305,7 @@ public class DBAdapter {
             cv.put(Constants.ketkarakter, ketkarakter);
             cv.put(Constants.negatifissue, negatifissue);
             cv.put(Constants.actionplan, actionplan);
-            cv.put(Constants.resumenasabah, resumenasabah);
+            cv.put(Constants.resumeanggota, resumeanggota);
             cv.put(Constants.totaltunggakan, totaltunggakan);
             cv.put(Constants.totalbayar, totalbayar);
             cv.put(Constants.perkiraan, perkiraan);
@@ -466,19 +466,19 @@ public class DBAdapter {
     public Cursor getcountercontact(String cif) {
         return db.rawQuery("SELECT COUNT(*) FROM " + Constants.TB_NAME15 + " where " + Constants.cif + " =?", new String[]{cif});
 
-        // return db.query(Constants.TB_NAME2,null ,Constants.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constants.TB_NAME2,null ,Constants.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getcounterfp(String tglsign) {
-        return db.rawQuery("SELECT COUNT(*) FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.NASABAH_BAYAR + " = ?", new String[]{tglsign, "Full"});
+        return db.rawQuery("SELECT COUNT(*) FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.anggota_BAYAR + " = ?", new String[]{tglsign, "Full"});
 
-        // return db.query(Constants.TB_NAME2,null ,Constants.NASABAH_BAYAR+" = ?",new String[]{"Full"},null,null,null);
+        // return db.query(Constants.TB_NAME2,null ,Constants.anggota_BAYAR+" = ?",new String[]{"Full"},null,null,null);
     }
 
     public Cursor getcounterpp(String tglsign) {
-        return db.rawQuery("SELECT COUNT(*) FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.NASABAH_BAYAR + " = ?", new String[]{tglsign, "Partial"});
+        return db.rawQuery("SELECT COUNT(*) FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.anggota_BAYAR + " = ?", new String[]{tglsign, "Partial"});
 
-        // return db.query(Constants.TB_NAME2,null ,Constants.NASABAH_BAYAR+" = ?",new String[]{"Partial"},null,null,null);
+        // return db.query(Constants.TB_NAME2,null ,Constants.anggota_BAYAR+" = ?",new String[]{"Partial"},null,null,null);
     }
 
     public Cursor getcounternp(String tglsign) {
@@ -489,15 +489,15 @@ public class DBAdapter {
 
     public Cursor getpp(String tglsign) {
         return db.rawQuery("SELECT " + Constants.ROW_ID2 + "," + Constants.NAME2 + "," + Constants.No_Loan2 + "," + Constants.Cycle2 + "," +
-                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.NASABAH_BAYAR + "," +
-                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERNASABAH + "," +
+                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.anggota_BAYAR + "," +
+                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERanggota + "," +
                 Constants.RESUME + "," + Constants.BUKTIBAYAR + "," + Constants.IMAGE + "," + Constants.TANGGALASIGN + "," + Constants.TANGGALPROSES + "," + Constants.STATUS +
-                " FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.NASABAH_BAYAR + " = ? ", new String[]{tglsign, "Partial"});
+                " FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.anggota_BAYAR + " = ? ", new String[]{tglsign, "Partial"});
 
         /*return db.rawQuery("SELECT "+"a."+Constants.ID+","+"a."+Constants.CIF+","+"a."+Constants.ACCTNO+","+"b."+Constants.No_Loan+","+"b."+Constants.NAME+","+"a."+Constants.PRODID+","+"a."+Constants.TENOR+","+"a."+Constants.DUEDATE+","+"b."+Constants.NOMINAL_BAYAR+","+"a."+
                 Constants.ALAMATKANTOR+","+"a."+Constants.KOTA+","+"a."+Constants.POS+","+"a."+Constants.BISNISAREA+","+"a."+Constants.RECORDOWNER+","+"a."+Constants.DPD+","+"a."+Constants.CYCLE+","+"a."+Constants.AGENTID+","+"a."+Constants.PPOKOK+","+"a."+Constants.TAGIHANPOKOK+","+"a."+Constants.BUNGA+","+"a."+Constants.DENDA+","+"a."+Constants.OS+","+"a."+Constants.TOTALKEWAJIBAN+","+"a."+Constants.STATUS1+","+"a."+Constants.TANGGALASIGNs+","+"a."+Constants.INSTALLMENTDATE+" " +
                 "FROM "+Constants.TB_NAME9+ " a " +" INNER JOIN " + Constants.TB_NAME2 +" b "
-                + " ON " +"a."+ Constants.LOAN + " = " +"b."+ Constants.No_Loan +" where SUBSTR("+"b."+Constants.TANGGALASIGN+",1,7)=?  AND "+"a."+Constants.DPD+" > ?"+" AND "+"a."+Constants.STATUS1+" = ?"+" AND "+"b."+Constants.NASABAH_BAYAR +" = ?" ,new String[]{tglsign,"0",String.valueOf( 1 ),"Partial"});
+                + " ON " +"a."+ Constants.LOAN + " = " +"b."+ Constants.No_Loan +" where SUBSTR("+"b."+Constants.TANGGALASIGN+",1,7)=?  AND "+"a."+Constants.DPD+" > ?"+" AND "+"a."+Constants.STATUS1+" = ?"+" AND "+"b."+Constants.anggota_BAYAR +" = ?" ,new String[]{tglsign,"0",String.valueOf( 1 ),"Partial"});
     */
     }
 
@@ -582,15 +582,15 @@ public class DBAdapter {
 
     public Cursor getfp(String full, String tglsign) {
         return db.rawQuery("SELECT " + Constants.ROW_ID2 + "," + Constants.NAME2 + "," + Constants.No_Loan2 + "," + Constants.Cycle2 + "," +
-                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.NASABAH_BAYAR + "," +
-                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERNASABAH + "," +
+                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.anggota_BAYAR + "," +
+                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERanggota + "," +
                 Constants.RESUME + "," + Constants.BUKTIBAYAR + "," + Constants.IMAGE + "," + Constants.TANGGALASIGN + "," + Constants.TANGGALPROSES + "," + Constants.STATUS +
-                " FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.NASABAH_BAYAR + " = ? ", new String[]{tglsign, full});
+                " FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.anggota_BAYAR + " = ? ", new String[]{tglsign, full});
 
         /*return db.rawQuery("SELECT "+"a."+Constants.ID+","+"a."+Constants.CIF+","+"a."+Constants.ACCTNO+","+"b."+Constants.No_Loan+","+"a."+Constants.NAMA+","+"a."+Constants.PRODID+","+"a."+Constants.TENOR+","+"a."+Constants.DUEDATE+","+"b."+Constants.NOMINAL_BAYAR+","+"a."+
                 Constants.ALAMATKANTOR+","+"a."+Constants.KOTA+","+"a."+Constants.POS+","+"a."+Constants.BISNISAREA+","+"a."+Constants.RECORDOWNER+","+"a."+Constants.DPD+","+"a."+Constants.CYCLE+","+"a."+Constants.AGENTID+","+"a."+Constants.PPOKOK+","+"a."+Constants.TAGIHANPOKOK+","+"a."+Constants.BUNGA+","+"a."+Constants.DENDA+","+"a."+Constants.OS+","+"a."+Constants.TOTALKEWAJIBAN+","+"a."+Constants.STATUS1+","+"a."+Constants.TANGGALASIGNs+","+"a."+Constants.INSTALLMENTDATE+" " +
                 "FROM "+Constants.TB_NAME9+ " a " +" INNER JOIN " + Constants.TB_NAME2 +" b "
-                + " ON " +"a."+ Constants.LOAN + " = " +"b."+ Constants.No_Loan +" where "+"a."+Constants.DPD+" > ?"+" AND "+"a."+Constants.STATUS1+" = ?"+" AND "+"b."+Constants.NASABAH_BAYAR +" = ? AND "+"a."+Constants.TANGGALASIGN+"= ?"  ,new String[]{"0","1",full,tglsign});
+                + " ON " +"a."+ Constants.LOAN + " = " +"b."+ Constants.No_Loan +" where "+"a."+Constants.DPD+" > ?"+" AND "+"a."+Constants.STATUS1+" = ?"+" AND "+"b."+Constants.anggota_BAYAR +" = ? AND "+"a."+Constants.TANGGALASIGN+"= ?"  ,new String[]{"0","1",full,tglsign});
    */
     }
 
@@ -657,7 +657,7 @@ public class DBAdapter {
     //hasil inventory survey
     public Cursor getAllhasilinventorysurvey() {
         String[] columns = {Constants.ROW_IDIVH, Constants.NAMEIVH, Constants.No_LoanIVH, Constants.CycleIVH, Constants.OsIVH
-                , Constants.TanggalIVH, Constants.AlamatIVH, Constants.BERTEMUDGN, Constants.KEBERADAAN_ASET, Constants.PKERJAAN_NASABAH
+                , Constants.TanggalIVH, Constants.AlamatIVH, Constants.BERTEMUDGN, Constants.KEBERADAAN_ASET, Constants.PKERJAAN_anggota
                 , Constants.TANGGALGAJIAN, Constants.POSISI_JENISUSAHA, Constants.KONDISIJAMINAN, Constants.DOCUMENT1, Constants.DOCUMENT2
                 , Constants.DOCUMENT3, Constants.DOCUMENT4, Constants.TANGGALASIGNhs, Constants.TANGGALPROSEShs, Constants.STATUShs, Constants.IMAGE};
 
@@ -672,13 +672,13 @@ public class DBAdapter {
 
     public Cursor getAllhasilinventorysurveyss(String tglsign, String loan) {
         /*String[] columns={Constants.ROW_IDIVH,Constants.NAMEIVH,Constants.No_LoanIVH,Constants.CycleIVH,Constants.OsIVH
-                ,Constants.TanggalIVH,Constants.AlamatIVH,Constants.BERTEMUDGN,Constants.KEBERADAAN_ASET,Constants.PKERJAAN_NASABAH
+                ,Constants.TanggalIVH,Constants.AlamatIVH,Constants.BERTEMUDGN,Constants.KEBERADAAN_ASET,Constants.PKERJAAN_anggota
                 ,Constants.TANGGALGAJIAN,Constants.POSISI_JENISUSAHA,Constants.KONDISIJAMINAN,Constants.DOCUMENT1,Constants.DOCUMENT2
                 ,Constants.DOCUMENT3,Constants.DOCUMENT4,Constants.TANGGALASIGNhs,Constants.TANGGALPROSEShs,Constants.STATUShs,Constants.IMAGE};
 */
         //return db.query(Constants.TB_NAME6,columns,Constants.No_LoanIVH+ "=?",new String[]{loan},null,null,null);
         return db.rawQuery(" SELECT " + Constants.ROW_IDIVH + "," + Constants.NAMEIVH + "," + Constants.No_LoanIVH + "," + Constants.CycleIVH + "," + Constants.OsIVH + "," +
-                Constants.TanggalIVH + "," + Constants.AlamatIVH + "," + Constants.BERTEMUDGN + "," + Constants.KEBERADAAN_ASET + "," + Constants.PKERJAAN_NASABAH + "," +
+                Constants.TanggalIVH + "," + Constants.AlamatIVH + "," + Constants.BERTEMUDGN + "," + Constants.KEBERADAAN_ASET + "," + Constants.PKERJAAN_anggota + "," +
                 Constants.TANGGALGAJIAN + "," + Constants.POSISI_JENISUSAHA + "," + Constants.KONDISIJAMINAN + "," + Constants.DOCUMENT1 + "," + Constants.DOCUMENT2 + "," +
                 Constants.DOCUMENT3 + "," + Constants.DOCUMENT4 + "," + Constants.TANGGALASIGNhs + "," + Constants.TANGGALPROSEShs + "," + Constants.STATUShs + "," + Constants.IMAGE + " FROM " + Constants.TB_NAME6 + " where SUBSTR(" + Constants.TANGGALASIGNhs + ",1,7) =? AND " + Constants.No_LoanIVH + " =?", new String[]{tglsign, loan});
     }
@@ -686,8 +686,8 @@ public class DBAdapter {
     public Cursor getAllhasilinventoryvisit() {
 
         String[] columns = {Constants.ROW_ID2, Constants.NAME2, Constants.No_Loan2, Constants.Cycle2, Constants.Os2
-                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.NASABAH_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
-                , Constants.LOKASIBERTEMU, Constants.KARAKTERNASABAH, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
+                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.anggota_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
+                , Constants.LOKASIBERTEMU, Constants.KARAKTERanggota, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
                 , Constants.TANGGALASIGN, Constants.TANGGALPROSES, Constants.STATUS};
 
         return db.query(Constants.TB_NAME2, columns, Constants.STATUS + "=?", new String[]{"0"}, null, null, null);
@@ -702,13 +702,13 @@ public class DBAdapter {
     public Cursor getAllhasilinventoryvisit2(String tglsign) {
 
         String[] columns = {Constants.ROW_ID2, Constants.NAME2, Constants.No_Loan2, Constants.Cycle2, Constants.Os2
-                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.NASABAH_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
-                , Constants.LOKASIBERTEMU, Constants.KARAKTERNASABAH, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
+                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.anggota_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
+                , Constants.LOKASIBERTEMU, Constants.KARAKTERanggota, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
                 , Constants.TANGGALASIGN, Constants.TANGGALPROSES, Constants.STATUS};
 
         return db.rawQuery("SELECT " + Constants.ROW_ID2 + "," + Constants.NAME2 + "," + Constants.No_Loan2 + "," + Constants.Cycle2 + "," +
-                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.NASABAH_BAYAR + "," +
-                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERNASABAH + "," +
+                Constants.Os2 + "," + Constants.Total_Kewajiban2 + "," + Constants.Alamat2 + "," + Constants.anggota_BAYAR + "," +
+                Constants.BERTEMU + "," + Constants.NOMINAL_BAYAR + "," + Constants.LOKASIBERTEMU + "," + Constants.KARAKTERanggota + "," +
                 Constants.RESUME + "," + Constants.BUKTIBAYAR + "," + Constants.IMAGE + "," + Constants.TANGGALASIGN + "," + Constants.TANGGALPROSES + "," + Constants.STATUS +
                 " FROM " + Constants.TB_NAME2 + " where SUBSTR(" + Constants.TANGGALASIGN + ",1,7) =? AND " + Constants.NOMINAL_BAYAR + " != ? AND " + Constants.STATUSSATTLEMENT + " = ?", new String[]{tglsign, "", "0"});
         //return db.query(Constants.TB_NAME2,columns,Constants.NOMINAL_BAYAR + " != ? AND " +Constants.STATUSSATTLEMENT+"= ?",new String[]{"",String.valueOf( 0 )},null,null,null);
@@ -717,8 +717,8 @@ public class DBAdapter {
     public Cursor getAllhasilinventoryvisitpayment(String loan, String os) {
 
         String[] columns = {Constants.ROW_ID2, Constants.NAME2, Constants.No_Loan2, Constants.Cycle2, Constants.Os2
-                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.NASABAH_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
-                , Constants.LOKASIBERTEMU, Constants.KARAKTERNASABAH, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
+                , Constants.Total_Kewajiban2, Constants.Alamat2, Constants.anggota_BAYAR, Constants.BERTEMU, Constants.NOMINAL_BAYAR
+                , Constants.LOKASIBERTEMU, Constants.KARAKTERanggota, Constants.RESUME, Constants.BUKTIBAYAR, Constants.IMAGE
                 , Constants.TANGGALASIGN, Constants.TANGGALPROSES, Constants.STATUS};
 
         return db.query(Constants.TB_NAME2, columns, Constants.No_Loan2 + "= ? AND " + Constants.OS + " = ? ", new String[]{loan, os}, null, null, null);
@@ -756,7 +756,7 @@ public class DBAdapter {
     public Cursor getlocation() {
         String[] columns = {Constants.ROW_USER, Constants.ROW_LAT, Constants.ROW_LONG, Constants.ROW_DATETIME, Constants.ROW_ID_USER, Constants.ROW_IDLOC};
 
-        return db.query(Constants.TB_NAME4, columns, Constants.ROW_STATUS + " = ?", new String[]{"BELUM TERKIRIM"}, null, null, null);
+        return db.query(Constants.TB_NAME4, columns, Constants.ROW_STATUS + " = ?", new String[]{"BELUM terkirim"}, null, null, null);
     }
 
     public Cursor getlist(String code,String type){

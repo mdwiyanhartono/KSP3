@@ -119,7 +119,7 @@ public class ActivityPhotoInputKunjungan extends BaseActivity {
     private void saveImage(String imageNameByTime) {
         if (bitmap != null) {
             saveImageToFolder(bitmap, imageNameByTime);
-        } else Toast.makeText(this, "Ambil foto dlu", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "ambil foto dlu", Toast.LENGTH_SHORT).show();
         {
         }
     }
@@ -239,7 +239,7 @@ public class ActivityPhotoInputKunjungan extends BaseActivity {
             } catch (Exception e) {
                 Log.d("Debug", e.toString());
             }
-        } else Toast.makeText(this, "Ambil foto dulu", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "ambil foto dulu", Toast.LENGTH_SHORT).show();
         {
 
         }
@@ -274,7 +274,7 @@ public class ActivityPhotoInputKunjungan extends BaseActivity {
     private File getOutputMediaFile(String imageNameByTime) throws IOException {
 
         // External sdcard location
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto");
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys").getAbsolutePath(), "AppsPhoto");
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
@@ -299,7 +299,7 @@ public class ActivityPhotoInputKunjungan extends BaseActivity {
 
     public String getFileName(String imageNameByTime) {
         String filename = "";
-        File file = new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys").getAbsolutePath(), "AppsPhoto");
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -310,7 +310,7 @@ public class ActivityPhotoInputKunjungan extends BaseActivity {
 
     private File getFileName1(String imageNameByTime) {
 
-        File file = new File(Environment.getExternalStoragePublicDirectory("Colsys").getAbsolutePath(), "AppsPhoto");
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Colsys").getAbsolutePath(), "AppsPhoto");
         if (!file.exists()) {
             file.mkdirs();
         }

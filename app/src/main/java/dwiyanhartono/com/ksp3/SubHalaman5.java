@@ -81,7 +81,7 @@ public class SubHalaman5 extends BaseActivity implements AdapterSub5.OnItemClick
         if (a.moveToFirst()) {
 //            Toast.makeText(this, "masuk 1", Toast.LENGTH_SHORT).show();
             do {
-                String namanasabah = a.getString( 6 );
+                String namaanggota = a.getString( 6 );
                 String cif = a.getString( 4 );
                 String loanid = a.getString( 1 );
                 String hasilkunjungan = a.getString( 9 );
@@ -90,7 +90,7 @@ public class SubHalaman5 extends BaseActivity implements AdapterSub5.OnItemClick
                 String actionplan = a.getString( 18 );
                 String tanggalactionplan = a.getString( 19 );
                 String nominal = a.getString( 22 );
-                Dataptp_1 data = new Dataptp_1(namanasabah,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan,tanggalactionplan,nominal);
+                Dataptp_1 data = new Dataptp_1(namaanggota,cif,loanid,hasilkunjungan,bertemu,lokasibertemu,actionplan,tanggalactionplan,nominal);
                 dataptpttoday.add(data);
 //                Toast.makeText(this, nama1+"/" + cif + "/" + datetime, Toast.LENGTH_SHORT).show();
             } while (a.moveToNext());
@@ -158,7 +158,7 @@ public class SubHalaman5 extends BaseActivity implements AdapterSub5.OnItemClick
         pdLoading.setCancelable(false);
         pdLoading.show();
         ApiRequestData api = Retroserver.getClient(getApplicationContext()).create(ApiRequestData.class);
-        Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur,id_user));
+        Call<ResponsModel> getdata = api.sendassignment(new ReqBodyApplyAssignment(selectedDebitur,id_user,""));
         getdata.enqueue(new Callback<ResponsModel>() {
             @Override
             public void onResponse(Call<ResponsModel> call, Response<ResponsModel> response) {
@@ -186,7 +186,7 @@ public class SubHalaman5 extends BaseActivity implements AdapterSub5.OnItemClick
                     AlertDialog.Builder alta = new AlertDialog.Builder(SubHalaman5.this);
                     alta.setTitle("Pesan");
                     alta.setIcon(R.drawable.warning);
-                    alta.setMessage("Data Gagal Di Kirim Ke Server , Silahakan Pilih Terlebih Dahulu Debitur Yang Akan Di Kunjungi!!!");
+                    alta.setMessage("Data gagal Di Kirim Ke Server , Silahakan Pilih Terlebih Dahulu Debitur Yang Akan Di Kunjungi!!!");
                     alta.setCancelable(false);
                     alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                         @Override
@@ -207,7 +207,7 @@ public class SubHalaman5 extends BaseActivity implements AdapterSub5.OnItemClick
                 AlertDialog.Builder alta = new AlertDialog.Builder(SubHalaman5.this);
                 alta.setTitle("Pesan");
                 alta.setIcon(R.drawable.warning);
-                alta.setMessage("Data Gagal Di Kirim Ke Server ," + t.getMessage() + "!!!");
+                alta.setMessage("Data gagal Di Kirim Ke Server ," + t.getMessage() + "!!!");
                 alta.setCancelable(false);
                 alta.setPositiveButton("Oke", new DialogInterface.OnClickListener() {
                     @Override

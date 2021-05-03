@@ -12,17 +12,17 @@ public class DataHistory {
     String bertemu;
     String lokasibertemu;
     String karakter;
-    String resumenasabah;
+    String resumeanggota;
     String actionplan;
     String tglvisit;
 
-    public DataHistory(String cif,String kunjungan, String totalbayar, String bertemu, String lokasibertemu, String karakter, String resumenasabah, String actionplan,String tglvisit) {
+    public DataHistory(String cif,String kunjungan, String totalbayar, String bertemu, String lokasibertemu, String karakter, String resumeanggota, String actionplan,String tglvisit) {
         this.kunjungan = kunjungan;
         this.totalbayar = totalbayar;
         this.bertemu = bertemu;
         this.lokasibertemu = lokasibertemu;
         this.karakter = karakter;
-        this.resumenasabah = resumenasabah;
+        this.resumeanggota = resumeanggota;
         this.actionplan = actionplan;
         this.tglvisit = tglvisit;
         this.cif = cif;
@@ -84,12 +84,12 @@ public class DataHistory {
         this.karakter = karakter;
     }
 
-    public String getResumenasabah() {
-        return resumenasabah;
+    public String getResumeanggota() {
+        return resumeanggota;
     }
 
-    public void setResumenasabah(String resumenasabah) {
-        this.resumenasabah = resumenasabah;
+    public void setResumeanggota(String resumeanggota) {
+        this.resumeanggota = resumeanggota;
     }
 
     public String getActionplan() {

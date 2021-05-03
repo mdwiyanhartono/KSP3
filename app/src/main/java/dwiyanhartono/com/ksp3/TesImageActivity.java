@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dwiyanhartono.com.ksp3.api.ApiRequestData;
 import dwiyanhartono.com.ksp3.api.Retroserver;
+import dwiyanhartono.com.ksp3.base.BaseActivity;
 import dwiyanhartono.com.ksp3.model.DataTesimage;
 import dwiyanhartono.com.ksp3.model.Requestimage;
 import dwiyanhartono.com.ksp3.model.ResponsModelTesimage;
@@ -23,7 +24,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TesImageActivity extends AppCompatActivity {
+public class TesImageActivity extends BaseActivity {
 
     Button btnviewimage;
     ImageView imageView;

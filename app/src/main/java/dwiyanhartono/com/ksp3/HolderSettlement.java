@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.recyclerview.widget.RecyclerView;
 
 class HolderSettlement extends RecyclerView.ViewHolder implements View.OnClickListener {
-    TextView nominal,namanasabah, cif,noref,tunggakan;
+    TextView nominal,namaanggota, cif,LD,tunggakan,norek;
     Button btnprint, btnsettlement;
 
     LinearLayout lytglptp;
@@ -20,16 +20,16 @@ class HolderSettlement extends RecyclerView.ViewHolder implements View.OnClickLi
     public HolderSettlement(@NonNull View itemView) {
         super(itemView);
 
-        namanasabah = (TextView) itemView.findViewById(R.id.namanasabah);
+        namaanggota = (TextView) itemView.findViewById(R.id.namaanggota);
         cif = (TextView) itemView.findViewById(R.id.cif);
-        nominal = (TextView) itemView.findViewById(R.id.nominalplan);
-        noref = (TextView) itemView.findViewById(R.id.ref);
-        tunggakan = (TextView) itemView.findViewById(R.id.tunggakan);
-        btnprint = (Button) itemView.findViewById(R.id.print);
-        btnsettlement = (Button) itemView.findViewById(R.id.settlement);
-
-        btnsettlement.setOnClickListener(this);
-        btnprint.setOnClickListener(this);
+        nominal = (TextView) itemView.findViewById(R.id.nominal);
+        LD = (TextView) itemView.findViewById(R.id.ld);
+        norek = (TextView) itemView.findViewById(R.id.norekanggota);
+//        tunggakan = (TextView) itemView.findViewById(R.id.tunggakan);
+//        btnprint = (Button) itemView.findViewById(R.id.print);
+//        btnsettlement = (Button) itemView.findViewById(R.id.settlement);
+        ck = itemView.findViewById(R.id.ck);
+//        btnprint.setOnClickListener(this);
     }
 
     @Override

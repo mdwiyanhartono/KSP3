@@ -33,7 +33,7 @@ public class AdapterSub1 extends RecyclerView.Adapter<HolderSub1> {
     @Override
     public void onBindViewHolder(final HolderSub1 holder, final int position) {
         final Datasub1_1 dm = assignment.get(position);
-        holder.namanasabah.setText(dm.getNamanasabah());
+        holder.namaanggota.setText(dm.getNamaanggota());
         holder.cif.setText(dm.getCif());
 //        holder.loan.setText(dm.getLoanid());
         holder.bertemu.setText(dm.getBertemu());
@@ -43,7 +43,7 @@ public class AdapterSub1 extends RecyclerView.Adapter<HolderSub1> {
 //        holder.buckettxt.setText(dm.getLokasibertemu());
 //        holder.bucketeomtxt.setText(dm.getLoanid());
 //        holder.ciftxt.setText(dm.getCif());
-//        holder.namatxt.setText(dm.getNamanasabah());
+//        holder.namatxt.setText(dm.getNamaanggota());
 //        holder.ostxt.setText(dm.getActionplan());
 //        holder.totaltunggakantxt.setText(dm.getHasilkunjungan());
 //        holder.alamat.setText(dm.getBertemu());

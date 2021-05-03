@@ -19,9 +19,10 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import dwiyanhartono.com.ksp3.base.BaseActivity;
 import uk.co.barbuzz.beerprogressview.BeerProgressView;
 
-public class MainActivityCekRoot extends AppCompatActivity
+public class MainActivityCekRoot extends BaseActivity
         implements CheckRootTask.OnCheckRootFinishedListener {
 
 

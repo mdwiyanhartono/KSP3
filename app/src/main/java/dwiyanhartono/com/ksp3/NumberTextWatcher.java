@@ -17,7 +17,7 @@ class NumberTextWatcher implements TextWatcher {
     private int trailingZeroCount;
 
 
-    public NumberTextWatcher(String totalTunggakan, EditText totalbayar, String pattern, EditText totalperkiraan, String angsuran) {
+    public NumberTextWatcher(String totalTunggakan, EditText totalbayar, String pattern, EditText totalperkiraan) {
 
         NumberFormat nf = NumberFormat.getInstance(Locale.US);
         df = (DecimalFormat) nf;
@@ -32,7 +32,6 @@ class NumberTextWatcher implements TextWatcher {
         String t = totalTunggakan.replaceAll(",", "");
 
         this.totalTunggakan = Double.parseDouble(t);
-        this.angsuran = Double.parseDouble(angsuran);
     }
 
     @Override

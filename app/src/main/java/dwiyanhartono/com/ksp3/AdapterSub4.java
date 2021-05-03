@@ -33,7 +33,7 @@ public class AdapterSub4 extends RecyclerView.Adapter<HolderSub4> {
     @Override
     public void onBindViewHolder(final HolderSub4 holder, final int position) {
         final Datasub4_1 dm = assignment.get(position);
-        holder.namanasabah.setText(dm.getNamanasabah());
+        holder.namaanggota.setText(dm.getNamaanggota());
         holder.cif.setText(dm.getCif());
         holder.loan.setText(dm.getLoanid());
         holder.bertemu.setText(dm.getBertemu());
